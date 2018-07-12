@@ -68,7 +68,7 @@ router.delete('/delete/:userid', function(req, res, next) {
               {
                 console.log(reqrddata);
                 //console.log(reqrddata.image);
-                if(reqrddata.image=="abc")
+                if(reqrddata.image=="abc"||!fs.existsSync('./public/uploads/'+reqrddata.image))
                 {
                   console.log('No Profile Pic Available');
                   Student.remove({userid:req.params.userid},function(err,result1){
@@ -125,7 +125,7 @@ router.delete('/delete/:userid', function(req, res, next) {
               {
                 //console.log(reqrddata);
                 //console.log(reqrddata.image);
-                if(reqrddata.image=="abc")
+                if(reqrddata.image=="abc"||!fs.existsSync('./public/uploads/'+reqrddata.image))
                 {
                   console.log('No Profile Pic Available');
                   HOD.remove({userid:req.params.userid},function(err,result1){
@@ -182,7 +182,7 @@ router.delete('/delete/:userid', function(req, res, next) {
               {
                 console.log(reqrddata);
                 //console.log(reqrddata.image);
-                if(reqrddata.image=="abc")
+                if(reqrddata.image=="abc"||!fs.existsSync('./public/uploads/'+reqrddata.image))
                 {
                   console.log('No Profile Pic Available');
                   TPO.remove({userid:req.params.userid},function(err,result1){
@@ -240,8 +240,7 @@ router.delete('/delete/:userid', function(req, res, next) {
         }
         else{
           res.json({success:false,msg:"Invalid Deletion in AllUsers"});
-        }
-        
+        }  
       })
     }
   })
