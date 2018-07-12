@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4 text-center">
+<div class="form-group ">
+<h2 class=" text-white">Change password</h2>
+<form (submit)="onPasswordResetSubmit()">
+<input type="password" placeholder="Old Password" name='oldpassword' [(ngModel)]="oldpassword" class="form-control" required><br>
+<input type="password" placeholder="New Password" name='newpassword' [(ngModel)]="newpassword" class="form-control" required><br>
+<input type="password" placeholder="Confirm New Password" name='confirmpassword' [(ngModel)]="confirmpassword" class="form-control" required><br>
+<input type="submit" value="Update" class="btn btn-primary">&nbsp;&nbsp;
+<input type="reset" value="Cancel" class="btn btn-primary" (click)="back()">
+</form>
+</div>
+</div>
+<div class="col-md-4"></div>
+</div>

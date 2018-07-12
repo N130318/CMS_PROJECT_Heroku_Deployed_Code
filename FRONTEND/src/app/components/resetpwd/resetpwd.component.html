@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4 text-center">
+<div class="form-group ">
+<h2 class=" text-white">Reset Password</h2>
+<form (submit)="onResetPwdSubmit()">
+<input type="password" placeholder="New Password" name='newpassword' [(ngModel)]="newpassword" class="form-control" required><br>
+<input type="password" placeholder="Confirm New Password" name='confirmpassword' [(ngModel)]="confirmpassword" class="form-control" required><br>
+<input type="submit" value="Reset Password" class="btn btn-primary">
+</form>
+</div>
+</div>
+<div class="col-md-4"></div>
+</div>

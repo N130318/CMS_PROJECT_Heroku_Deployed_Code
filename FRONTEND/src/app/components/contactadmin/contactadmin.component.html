@@ -1,0 +1,52 @@
+<div class="container first">
+  <div class="py-5 text-center ">
+      <img class="d-block mx-auto mb-4 ">
+      <font color="white">
+          <h1><u>CONTACT Admin</u></h1>
+      </font>
+
+  </div>
+      <div class="col-md-8 order-md-1 ">
+          <font color="white">
+              <h3>Please fill in your details</h3>
+          </font>
+          <form (submit)="onRequest()">
+          <div class="needs-validation " novalidate>
+                  <div class="col-md-6 mb-3 ">
+                      <label for="email"><font color="white">Email / UserId</font></label>
+                      <input type="email" class="form-control " name="emailoruid" placeholder="Enter your E-mail or Userid" [(ngModel)]="emailoruid" required>
+                      <div class="invalid-feedback ">
+                        Please enter a valid email address to help us get in touch with you.
+                      </div>
+                  </div>
+                  <div class="form-group col-md-6 mb-3">
+                      <label for="email"><font color="white">Role</font></label>
+                    <select class="form-control" name="role" [(ngModel)]="role">
+                        <option disabled="disabled" selected>select role</option>
+                        <option value="student">STUDENT</option>
+                        <option value="hod">HOD</option>
+                        <option value="tpo">TPO</option>
+                    </select>
+                </div>
+                  <div class="col-md-6 mb-3 ">
+                      <label for="lastName "><font color="white">Subject</font></label>
+                      <input type="text " class="form-control" maxlength="15" name="subject" title="Enter Short form of your request Max Characters: 15 Ex: Forgot Email-Id" placeholder="Enter Title of request Max Characters:15" [(ngModel)]="subject" required>
+                      <div class="invalid-feedback ">
+                          Valid Subject is required.
+                      </div>
+                  </div>
+
+                  <div class="col-md-6 mb-3 ">
+                      <label for="address2 "><font color="white">Message</font> <span class="text-muted "></span></label>
+                      <textarea rows="4" cols="50" name="message" [(ngModel)]="message" class="form-control" placeholder="Enter your Request Description"> </textarea>
+                  </div>
+                  <hr class="mb-4 ">
+                  <input type="submit" class="btn btn-primary btn-lg btn-block" value="Submit Request">
+                  </div>
+                  </form>
+                  <div id="floating-button">
+                          <img class="qr" src="/assets/qr.png">
+                      </div>
+                  <footer class="my-5 pt-5 text-muted text-center text-small ">
+
+                  </footer>

@@ -1,0 +1,155 @@
+<!-- HOD PROFILE -->
+<div class="body" *ngIf="authService.hodLoggedIn() && authService.isProfileFilled() && !checkProfileUpdateCall()">
+  <div class="container">
+    <div class="row">
+      <div class="offset-lg-4 col-lg-4 col-sm-6 col-12 main-section text-center">
+          
+          <div class="row user-detail">
+              <div class="col-lg-12 col-sm-12 col-12">
+                  <img [src]="'uploads/'+image" class="rounded-circle img-thumbnail">
+                  <h5>{{name}}&nbsp;<sub><small>{{qualification}}</small></sub></h5>
+
+                  <span>{{role.toUpperCase()}} : {{dept}}</span>
+
+                  <hr>
+                  <label  class="btn btn-success btn-sm">{{email}}</label>&nbsp;
+                  <label class="btn btn-info btn-sm">{{phone}}</label>                    
+                  <hr>
+                  <p><i class="fa fa-map-marker" aria-hidden="true">address : </i> {{address}}</p>
+                  
+              </div>
+          </div>
+          <div class="btn btn-info form-control" (click)="profileUpdateCall()">
+                <div class="col-lg-12 col-sm-12 col-12">
+                    <i>Update</i>
+                </div> 
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Student Profile-->
+
+<div class="body" *ngIf="authService.studentLoggedIn() && authService.isProfileFilled() && !checkProfileUpdateCall()">
+    <div class="container">
+        <div class="row">
+            <div class="offset-lg-4 col-lg-4 col-sm-6 col-12 main-section text-center">
+                <div class="row user-detail">
+                    <div class="col-lg-12 col-sm-12 col-12">
+                        <img [src]="'uploads/'+image" class="rounded-circle img-thumbnail">
+                        <h5>{{name}}</h5>
+                        <span>{{userid}}</span>
+                        <hr>
+                        <label class="btn btn-primary btn-sm">Aggregate:{{aggregate}}</label>
+                        <hr>
+                        <label class="btn btn-info btn-sm">{{dept}}</label>&nbsp;
+                        <label class="btn btn-info btn-sm">{{year}}</label>
+                        <hr>
+                        <label  class="btn btn-success btn-sm">{{email}}</label>&nbsp;
+                        <label class="btn btn-info btn-sm">{{phone}}</label>
+                        <hr>
+                        <p><i class="fa fa-map-marker" aria-hidden="true">address : </i>{{address}}</p>
+                    </div>
+                </div>
+                <div class="btn btn-info form-control" (click)="profileUpdateCall()">
+                        <div class="col-lg-12 col-sm-12 col-12">
+                            <i>Update</i>
+                        </div> 
+                    </div>
+            </div>
+        </div>
+  </div>
+</div>
+
+<!-- Tpo profile-->
+
+<div class="body" *ngIf="authService.tpoLoggedIn() && authService.isProfileFilled() && !checkProfileUpdateCall()">
+  <div class="body" align="center">
+    <div class="container">
+      <div class="row">
+        <div class="offset-lg-4 col-lg-4 col-sm-6 col-12 main-section text-center">
+            
+            <div class="row user-detail">
+                <div class="col-lg-12 col-sm-12 col-12">
+                    <img [src]="'uploads/'+image" class="rounded-circle img-thumbnail">
+                    <h5>{{name}}</h5>
+                    <span>{{qualification}}</span>
+                    
+  
+                    <hr>
+                    <label  class="btn btn-success btn-sm">{{email}}</label>&nbsp;
+                    <label class="btn btn-info btn-sm">{{phone}}</label>
+                    
+  
+                    
+                    <hr>
+                    <p><i class="fa fa-map-marker" aria-hidden="true">address : </i> {{address}}</p>
+                    
+                </div>
+            </div>
+            <div class="btn btn-info form-control" (click)="profileUpdateCall()">
+                <div class="col-lg-12 col-sm-12 col-12">
+                    <i>Update</i>
+                </div> 
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--profile Form-->
+
+<div *ngIf="!authService.isProfileFilled() || checkProfileUpdateCall()">
+<form class="example-form" (submit)="onProfileSubmit()">
+        <div style=" border-style: solid; border-color:transparent; border-radius: 8px;  
+        border-width: -5px; margin-top: 9%;background-color:transparent; padding:12px;"class="text-white">
+        <h2>Profile : {{this.userid}}</h2>
+        <div class="form-group example-full-width text-black">
+            <input placeholder="Name" name="name" [(ngModel)]="name"  class="form-control" required>
+        </div>
+        <div class=" form-group example-full-width" *ngIf="authService.hodLoggedIn() || authService.tpoLoggedIn()">
+            <input placeholder="Qualification" name='qualification' [(ngModel)]="qualification" class="form-control" required>
+        </div>
+        <div class="form-group example-full-width" *ngIf="authService.studentLoggedIn()">
+                <input placeholder="DOB(dd/mm/yyyy)" type="text" name="dob" [(ngModel)]="dob" class="form-control" required >
+            </div>
+        <div class="form-group example-full-width">
+            <input placeholder="E-mail" type="email" name="email" [(ngModel)]="email" class="form-control" required >
+        </div>
+        <div class="form-group example-full-width">
+            <input placeholder="Phonenumber" required type="text" maxlength="10" [(ngModel)]="phone" class="form-control"  name='phone'>
+        </div>
+        <div class="form-group example-full-width">
+            <textarea placeholder="Address" name="address" [(ngModel)]="address" class="form-control" required ></textarea>
+        </div>
+        <div class="form-group example-full-width" *ngIf="authService.studentLoggedIn()">
+            <input placeholder="aggregate" type="number" name="aggregate" [(ngModel)]="aggregate" class="form-control"  required >
+        </div>
+        <div class="form-group" *ngIf="authService.studentLoggedIn()">
+            <select placeholder="Year" class="example-full-width form-control" name="year" [(ngModel)]="year" required>
+                <option>--</option>
+                <option value="1year">1<sup>st</sup>year</option>
+                <option value="2year">2<sup>nd</sup>year</option>
+                <option value="3year">3<sup>rd</sup>year</option>
+                <option value="4year">4<sup>th</sup>year</option>
+            </select>
+        </div>
+        <!-- <div class="example-full-width">
+            <input type="password" matInput placeholder="password" name="password" [(ngModel)]="password"required>
+        </div>
+        <div class="example-full-width">
+                <input type="password" matInput placeholder="confirm-password" name="cpassword" [(ngModel)]="cpassword" required>
+            </div> -->
+        <div class="form-group">
+                <input  (change)="selectFile($event)" type="file" placeholder="Picture">
+       </div>
+       <!-- <a [routerLink]="['/reset']" class="text-white">Change Password</a><br><br> -->
+       <div class="profilebtn" style="display: inline; padding-left: 20%;">
+        <button mat-button type="submit" VALUE="Update" style="width: 70px; background-color:#0066ff; color:white; border-radius:8px;" >Update</button> &nbsp;&nbsp;&nbsp;
+        <button mat-raised-button mat-button   VALUE="CANCEL" style="background-color:#0066ff; color:white; border-radius:8px; width: 70px;" (click)="profileUpdateCall()" >Cancel</button>
+      </div> 
+      </div>
+      </form>
+      </div>

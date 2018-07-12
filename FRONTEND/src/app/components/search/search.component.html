@@ -1,0 +1,315 @@
+<!--admin  search-->
+<div *ngIf="authService.adminLoggedIn()">
+  <div class="text-white mb-4">
+ 
+  <form class="form-horizontal" (submit)="onSearchSubmit()">
+      <h1 class="h3 mb-3 text-center font-weight-normal">
+          <font>ADMIN SEARCH</font>
+        </h1>
+    <div class="row">
+      <div class="col-md-5">
+          <div class="form-group">
+              <label class="control-label">Branch:</label>
+              <select class="form-control" name="dept" [(ngModel)]="dept" required>
+                <option [ngValue]="undefined" disabled selected>Choose Dept.</option>
+                <option value="CIVIL">CIVIL ENGINEERING</option>
+                <option value="EEE">ELECTRICAL AND ELECTRONICS ENGINEERING</option>
+                <option value="MECH">MECHANICAL ENGINEERING</option>
+                <option value="ECE">ELECTRONICS AND COMMUNICATION ENGINEERING</option>
+                <option value="CSE">COMPUTER SCIENCE ENGINEERING</option>
+                <option value="IT">INFORMATION TECHNOLOGY</option>
+              </select>
+            </div>
+        </div>
+        <div class="col-md-5">
+          <div class="form-group">
+            <label>Year:</label>
+            <select class="form-control" name="year" [(ngModel)]="year" required>
+                <option [ngValue]="undefined" disabled selected>Choose Year</option>
+                <option value="all">All</option>
+              <option value="1year">I Year</option>
+              <option value="2year">II Year</option>
+              <option value="3year">III Year</option>
+              <option value="4year">IV Year</option>
+            </select>
+          </div>
+        </div>
+          <div class="col-md-2">
+            <div class="form-group">
+                <label></label>
+                <input type="submit" class="btn btn-primary button-line" value="Search">
+            </div>
+        </div>
+        </div>
+  </form> 
+  </div>
+
+  <div *ngIf="hasResult()">
+    <table class="table text-white">
+    <thead>
+          <tr>
+              <th>#</th>
+              <th>userID</th>
+              <th>Name</th>
+              <th>DOB</th>
+              <th>Year</th>
+              <th>Department</th>
+              <th>Email Address</th>
+              <th *ngIf="authService.adminLoggedIn()">Opearation</th>
+              <th *ngIf="authService.adminLoggedIn()">Opearation</th>
+          </tr>
+      </thead>
+    <!--Table head-->
+  
+      <!--Table body-->
+      <tbody>
+          <tr *ngFor="let rec of students">
+              <td scope="row">{{students.indexOf(rec)+1}}</td>
+              <td>{{rec.userid}}</td>
+              <td>{{rec.name}}</td>
+              <td>{{rec.dob}}</td>
+              <td>{{rec.year}}</td>
+              <td>{{rec.dept}}</td>
+              <td>{{rec.email}}</td>
+              <td *ngIf="authService.adminLoggedIn()"><input type="button" (click)="deletestudent(rec)" value="Delete" class="btn btn-danger"></td>
+              <td *ngIf="authService.adminLoggedIn()"><a class="nav-link" [routerLink]="['/add']"><input type="button" (click)="updatestudent(rec)" value="Update" class="btn btn-primary"></a></td>
+          </tr>
+      </tbody>
+      <!--Table body-->
+  
+  </table>
+  <!--Table-->
+  </div>
+  
+  
+</div>
+
+<!--hod search-->
+<div *ngIf="authService.hodLoggedIn()">
+  <div class="text-white mb-4">
+ 
+  <form class="form-horizontal" (submit)="onHodSearchSubmit()">
+      <h1 class="h3 mb-3 text-center font-weight-normal">
+          <font>HOD SEARCH</font>
+        </h1>
+    <div class="row">
+      <div class="col-md-3">
+        </div>
+        <div class="col-md-5">
+          <div class="form-group">
+            <label>Year:</label>
+            <select class="form-control" name="year" [(ngModel)]="year" required>
+                <option [ngValue]="undefined" disabled selected>Choose Year</option>
+                <option value="all">All</option>
+              <option value="1year">I Year</option>
+              <option value="2year">II Year</option>
+              <option value="3year">III Year</option>
+              <option value="4year">IV Year</option>
+            </select>
+          </div>
+        </div>
+          <div class="col-md-2">
+            <div class="form-group">
+                <label></label>
+                <input type="submit" class="btn btn-primary button-line" value="Search">
+            </div>
+        </div>
+        </div>
+  </form> 
+  </div>
+
+  <div *ngIf="hasResult()">
+    <table class="table text-white">
+    <thead>
+          <tr>
+              <th>#</th>
+              <th>userID</th>
+              <th>Name</th>
+              <th>DOB</th>
+              <th>Year</th>
+              <th>Department</th>
+              <th>Aggregate</th>
+          </tr>
+      </thead>
+    <!--Table head-->
+  
+      <!--Table body-->
+      <tbody>
+          <tr *ngFor="let rec of students">
+              <td scope="row">{{students.indexOf(rec)+1}}</td>
+              <td>{{rec.userid}}</td>
+              <td>{{rec.name}}</td>
+              <td>{{rec.dob}}</td>
+              <td>{{rec.year}}</td>
+              <td>{{rec.dept}}</td>
+              <td>{{rec.aggregate}}</td>
+          </tr>
+      </tbody>
+      <!--Table body-->
+  
+  </table>
+  <!--Table-->
+  </div>
+  
+  
+</div>
+
+<!--tpo search page-->
+<div *ngIf="authService.tpoLoggedIn()">
+<div class="text-center">
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <!-- <header class="masthead mb-auto">
+            <div class="inner">
+                <nav class="nav nav-masthead justify-content-center">
+                </nav>
+            </div>
+        </header> -->
+
+        <main role="main" class="inner cover">
+            <div class="text-center mb-4" style="padding-top: 90px;">
+                <h1 class="h3 mb-3 font-weight-normal">
+                    <font color="white"><u>Training & Placement Officer Search</u></font>
+                </h1>
+            </div>
+
+            <div class=" checkMark text-white " style="padding-top: 15px;">
+                <div class="p-y-200 col-auto">
+                    <div class="Branch form-row col">
+                        <div class="bg-primary col-2 rounded p-2 w-25 d-inline text-white">
+                            <h5>Branch</h5>
+                        </div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" (change)="selectdepts($event)" value="CSE">
+                            <label class="form-check-label" for="inlineCheckbox1">CSE</label>
+                        </div>&nbsp;&nbsp;&nbsp;
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" (change)="selectdepts($event)" value="ECE">
+                            <label class="form-check-label" for="inlineCheckbox2">ECE</label>
+                        </div>&nbsp;&nbsp;&nbsp;
+                        <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" (change)="selectdepts($event)" value="IT">
+                                <label class="form-check-label" for="inlineCheckbox1">IT</label>
+                            </div>&nbsp;&nbsp;&nbsp;
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" (change)="selectdepts($event)" value="CIVIL">
+                            <label class="form-check-label" for="inlineCheckbox2">CIVIL</label>
+                        </div>&nbsp;&nbsp;&nbsp;
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" (change)="selectdepts($event)" value="MECH">
+                            <label class="form-check-label" for="inlineCheckbox1">MECH</label>
+                        </div>&nbsp;&nbsp;&nbsp;
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" (change)="selectdepts($event)" value="EEE">
+                            <label class="form-check-label" for="inlineCheckbox2">EEE</label>
+                        </div>
+                        <!-- <button (click)="show()">show</button> -->
+                    </div>
+                        <br>
+                    <!-- year checkbox -->
+                    <div>
+
+                        <div class="d-inline year">
+                            <div class="form-row col">
+                                <div class="bg-primary rounded col-2 p-2 d-inline-flex text-white">&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <h5>Year</h5>
+                                </div>
+                                &nbsp;&nbsp;&nbsp;
+                                <div class="form-check form-check-inline p-2">
+                                    <input class="form-check-input" type="checkbox" (change)="selectyears($event)" value="1year">
+                                    <label class="form-check-label" for="inlineCheckbox1">FIRST</label>
+                                </div>&nbsp;&nbsp;
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" (change)="selectyears($event)" value="2year">
+                                    <label class="form-check-label" for="inlineCheckbox2">SECOND</label>
+                                </div>&nbsp;&nbsp;
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" (change)="selectyears($event)"  value="3year">
+                                    <label class="form-check-label" for="inlineCheckbox1">THIRD</label>
+                                </div>&nbsp;&nbsp;
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" (change)="selectyears($event)" value="4year">
+                                    <label class="form-check-label" for="inlineCheckbox2">FOURTH</label>
+                                </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                                
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <br>
+
+                    <div class="form-group">
+                        <input type="text" name="minaggrigt" [(ngModel)]="minaggrigt" class="form-control" title="Enter Minimum Criteria If Any, else Enter 0" placeholder="Enter Minimum Aggregate If not Avail. Enter 0" required>
+                    </div>
+
+                    <!-- <br>
+                    <br>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="">Percentage</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="min %">
+                        <input type="text" class="form-control" placeholder="max %">
+                    </div> -->
+                    <br>
+                    <div>
+                        <input type="button" class="text-center btn btn-md btn-primary" (click)="onSearchClick()" value="Search">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <br>
+        </main></div></div></div>
+
+<!--result-->
+
+
+  <!-- <div *ngIf="!hasResult()">
+    <div class="text-center text-white">
+      <p>no result found!</p>
+    </div>
+  </div> -->
+
+<div *ngIf="tpotable">
+<!--Table-->
+<button class="text-center btn btn-md btn-success" style="float:right;margin-bottom:4px;" (click)="tableToExcel('testTable', 'Student_List', 'myfile.xls')" value="Export">Export</button>
+<table id="testTable" class="table text-white">
+        <!--Table head-->
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>UserId</th>
+                <th>Name</th>
+                <th>DOB</th>
+                <th>Aggregate</th>
+                <th>Year</th>
+                <th>Department</th>
+                <th>E-mail</th>
+            </tr>
+        </thead>
+      <!--Table head-->
+    
+        <!--Table body-->
+        <tbody>
+            <tr *ngFor="let rec of tpoResult">
+                <th scope="row">{{tpoResult.indexOf(rec)+1}}</th>
+                <td>{{rec.userid}}</td>
+                <td>{{rec.name}}</td>
+                <td>{{rec.dob}}</td>
+                <td>{{rec.aggregate}}</td>
+                <td>{{rec.year}}</td>
+                <td>{{rec.dept}}</td>
+                <td>{{rec.email}}</td>
+            </tr>
+        </tbody>
+        <!--Table body-->
+    
+    </table>
+    <!--Table-->
+<div>

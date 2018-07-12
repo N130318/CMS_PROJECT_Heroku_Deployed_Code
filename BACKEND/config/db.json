@@ -1,0 +1,11 @@
+{
+    "dialect": "mongodb",
+    "username": "projectUser",
+    "password": "password%409144",
+    "host": "ds147030.mlab.com",
+    "port": "47030",
+    "name": "cms_project",
+    "secret": "miracle"
+}
+
+

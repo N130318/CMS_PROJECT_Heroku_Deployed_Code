@@ -1,0 +1,230 @@
+<!-- Edit Post Form -->
+
+<!-- posting card with select tags for branch -->
+<div *ngIf="(authService.hodLoggedIn()||authService.tpoLoggedIn())&&(postedit)">
+  <div class="body">
+    <div align="center">
+      <div class="card" style="background-color: transparent">
+          <div >
+            <div class="card " >
+                <div class="card-header" style="background-color: wheat">Edit Post</div>
+                <form #frm="ngForm" (ngSubmit)="onUpdatePost(frm)">
+                  <div class="card-body" >
+                    <div class="form-group">
+                    <input type="text" size="65" maxlength="100" placeholder="TITLE" name="title" [ngModel]="selectedPost.title" class="form-control"  required>
+                    </div>
+                    <div class="form-group">
+                      <textarea class="form-control"  placeholder="DESCRIPTION" name="content" [ngModel]="selectedPost.content" required></textarea>
+                    </div>
+                    <input type="submit" class="btn btn-success" value="update post" style="float:right; border-radius: 8px;">
+                    <input type="button" class="btn btn-success" value="cancel" style="float:right; border-radius: 8px;" (click)="onCancelClick()">
+                    <div>
+                        <select class="btn btn-primary dropdown-toggle" data-toggle="dropdown" placeholder="year" type="button" style="float:left; margin-right:11px; border-radius: 8px;" name="year" [ngModel]="selectedPost.year">
+                            <option [ngValue]="undefined" disabled selected>YEAR</option>
+                            <option value="all">All</option>
+                            <option value="1year">1<sup>st </sup>year</option>
+                            <option value="2year">2<sup>nd </sup>year</option>
+                            <option value="3year">3<sup>rd </sup>year</option>
+                            <option value="4year">4<sup>th </sup>year</option>
+                          </select>
+                    </div>
+                    <!-- <div class="button-group ">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="float:left; margin-right:11px; border-radius: 8px;" name="year" ng-Model>YEAR</button>
+                      <ul class="dropdown-menu ">
+                          <li [class.selected]="cb1.checked">&nbsp;<input #cb1 type="checkbox" value="all"/>&nbsp;All</li>
+                        <li>&nbsp;<input type="checkbox" ng-checked="all"/>&nbsp;1ST</li>
+                        <li>&nbsp;<input type="checkbox" ng-checked="all"/>&nbsp;2ND</li>
+                        <li>&nbsp;<input type="checkbox" ng-checked="all"/>&nbsp;3RD</li>
+                        <li>&nbsp;<input type="checkbox" ng-checked="all"/>&nbsp;4TH</li>
+                      </ul>
+                  </div>-->
+                    <div class="button-group" *ngIf="authService.tpoLoggedIn()">
+                        <select class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button" style="float:left; margin-right:11px; border-radius: 8px;" name="dept" [ngModel]="selectedPost.dept">
+                            <option [ngValue]="undefined" disabled selected>Dept.</option>
+                            <option value="all" selected>All</option>
+                            <option value="CSE">CSE</option>
+                            <option value="EEE">EEE</option>
+                            <option value="ECE">ECE</option>
+                            <option value="MECH">MECH</option>
+                            <option value="CIVIL">CIVIL</option>
+                            <option value="IT">IT</option>
+                          </select>
+                  </div></div>
+                    </form>
+               <!-- <div class="card-footer">Footer</div> -->
+              </div>
+        </div>
+    </div >
+  </div>
+  </div></div>
+
+
+<!--hod dashboard-->
+
+<!-- posting card with select tags for branch -->
+<div *ngIf="(authService.hodLoggedIn()||authService.tpoLoggedIn())&&!(postedit)">
+  <div class="body">
+    <div align="center">
+      <div class="card" style="background-color: transparent">
+          <div >
+            <div class="card " >
+                <div class="card-header" style="background-color: wheat">write a post to student timeline</div>
+                <form>
+                  <div class="card-body" >
+                    <div class="form-group">
+                    <input type="text" size="65" maxlength="100" placeholder="TITLE" name="title" [(ngModel)]="title" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                      <textarea class="form-control"  placeholder="DESCRIPTION" name="content" [(ngModel)]="content" required></textarea>
+                    </div>
+                    <input type="button" class="btn btn-success" value="post" style="float:right; border-radius: 8px;" (click)="onPostClick()">
+                    <div>
+                        <select class="btn btn-primary dropdown-toggle" data-toggle="dropdown" placeholder="year" type="button" style="float:left; margin-right:11px; border-radius: 8px;" name="year" [(ngModel)]="year">
+                            <option [ngValue]="undefined" disabled selected>YEAR</option>
+                            <option value="all">All</option>
+                            <option value="1year">1<sup>st </sup>year</option>
+                            <option value="2year">2<sup>nd </sup>year</option>
+                            <option value="3year">3<sup>rd </sup>year</option>
+                            <option value="4year">4<sup>th </sup>year</option>
+                          </select>
+                    </div>
+                    <!-- <div class="button-group ">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="float:left; margin-right:11px; border-radius: 8px;" name="year" ng-Model>YEAR</button>
+                      <ul class="dropdown-menu ">
+                          <li [class.selected]="cb1.checked">&nbsp;<input #cb1 type="checkbox" value="all"/>&nbsp;All</li>
+                        <li>&nbsp;<input type="checkbox" ng-checked="all"/>&nbsp;1ST</li>
+                        <li>&nbsp;<input type="checkbox" ng-checked="all"/>&nbsp;2ND</li>
+                        <li>&nbsp;<input type="checkbox" ng-checked="all"/>&nbsp;3RD</li>
+                        <li>&nbsp;<input type="checkbox" ng-checked="all"/>&nbsp;4TH</li>
+                      </ul>
+                  </div>-->
+                    <div class="button-group" *ngIf="authService.tpoLoggedIn()">
+                        <select class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button" style="float:left; margin-right:11px; border-radius: 8px;" name="dept" [(ngModel)]="dept">
+                            <option [ngValue]="undefined" disabled selected>Dept.</option>
+                            <option value="all" selected>All</option>
+                            <option value="CSE">CSE</option>
+                            <option value="EEE">EEE</option>
+                            <option value="ECE">ECE</option>
+                            <option value="MECH">MECH</option>
+                            <option value="CIVIL">CIVIL</option>
+                            <option value="IT">IT</option>
+                          </select>
+                  </div></div>
+                    </form>
+               <!-- <div class="card-footer">Footer</div> -->
+              </div>
+        </div>
+    </div >
+  </div>
+  </div></div>
+
+  <!--TPO DASHBOARD-->
+
+<!--student dashboard-->
+
+<div *ngIf="authService.adminLoggedIn()">
+  <h1 class="h1 mb-1 text-center font-weight-normal text-white" style="padding:10px;">Admin Welcome to your Dashboard</h1><br>
+  <h2 class="h2 mb-2 text-center font-weight-normal text-white">Your having Rights to Perform following Operations:</h2><br>
+  <ul class="text-center font-weight-normal text-white" style="list-style-type: none;">
+    <li>Add Users(HOD,TPO,STUDENTS)</li>
+    <li>Update/Delete Users(HOD,TPO,STUDENTS)</li>
+    <li>Search Students</li>
+    <li>Change Password</li>
+  </ul>
+</div>
+
+
+<div *ngIf="authService.studentLoggedIn()||authService.hodLoggedIn()||authService.tpoLoggedIn()">
+    <!-- <div class="body">
+      <div align="center">
+        <div class="card-header " style=" width: 300px;background-color:#dee2e6"><h3>Timeline</h3></div>
+     -->
+    
+          <div class="container" *ngIf="authService.studentLoggedIn()">
+      
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" style="float: left;">Timetable</button>
+    
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog">
+              
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <!-- <h4 class="modal-title">Modal Header</h4>-->
+                </div>
+            <div class="modal-body ">
+              <table border="" >
+          <tr><th>PERIOD</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+          <tr><th>DAY</th><td>9:00-10:00</td><td>10:00-11:00</td><td>11:00-12:00</td><td>12:00-1:00</td><td>1:00-2:00</td><td>2:00-3:00</td><td>3:00-4:00</td></tr>
+          <tr><th>MON</th><td>CN</td><td>DAA</td><td>IPR</td><td rowspan="6" valign="middle">LUNCH BREAK</td><td>SE</td><td>WT</td><td>DWDM</td></tr>
+          <tr><th>TUE</th><td>IPR</td><td>DWDM</td><td>DAA</td><td colspan="3">-----WT-----</td></tr>
+          <tr><th>WED</th><td>SE </td><td>DWDM</td><td>CN</td><td>WT</td><td>IPR</td><td>DAA</td></tr>
+          <tr><th>THU</th><td colspan="3">---WT---</td><td>CN</td><td>WT</td><td>SE</td></tr>
+          <tr><th>FRI</th><td>WT</td><td>CN</td><td>DWDM</td><td>SE</td><td>DAA</td><td>IPR</td></tr>
+          <tr><th>SAT</th><td>Seminar</td><td>seminar</td><td>LIBRARY</td><td colspan="3">---SPORTS---</td></tr>
+        </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+    
+    <div class="dropdown float-right" >
+        <select class="btn btn-primary btn-md dropdown-toggle p-23" type="button" data-toggle="dropdown" name="pselect" [(ngModel)]="pselect" (change)="getPostsOf()">
+        <!-- <span class="caret"></span>
+        <ul class="dropdown-menu">
+          <option><li><a href="#"></a>HTML</a></li></option>
+          <li><a href="#">CSS</a></li>
+          <li><a href="#">JavaScript</a></li>
+        </ul> -->
+        <option value="undefined" selected disabled>Select</option>
+        <option value="all">ALL</option>
+        <option value="hod" >HOD</option>
+        <option value="tpo">TPO</option>
+      </select>
+      </div>
+    </div>
+    
+    <br>
+    <!-- Post Displaying for all users Except Admin-->
+    <div align="center">
+       <br>
+       <div class="card md" style="background-color: transparent;">           
+        <div ><!--continer-->
+          <div *ngFor="let post of posts" style="padding-bottom: 1.5%;">
+              <div class="card" >
+                <div class="card-header text-center" style="background-color: wheat"><h6>{{post.title}}</h6>
+                  <button style="float:right;" class="btn btn-primary" *ngIf="authService.hodLoggedIn()||authService.tpoLoggedIn()" (click)="showeditpost(post)" >Edit</button>
+                  <button style="float:right;" class="btn btn-primary" *ngIf="authService.hodLoggedIn()||authService.tpoLoggedIn()" (click)="deletepost(post)">Delete</button>
+                </div>
+                <div class="card-body">
+                  <p>{{post.content}}</p>
+                  <div class="float-left text-left" style="opacity: 0.5;">
+                      Posted by : {{post.postedby}}
+                      <br>
+                      Posted Dept : {{post.dept}}
+                    </div>
+                  <div class="float-right text-right" style="opacity: 0.5;">
+                      Posted To : {{post.year}}
+                      <br>
+                    Posted On : {{post.postedon?post.postedon:"just now"}}
+                  </div>
+                </div> 
+               <!-- <div class="card-footer">Footer</div> -->
+              </div>
+            
+        </div>
+        <br>
+      <!-- removed from here -->
+     </div>
+        <br>
+      </div>
+    </div>
+    </div>

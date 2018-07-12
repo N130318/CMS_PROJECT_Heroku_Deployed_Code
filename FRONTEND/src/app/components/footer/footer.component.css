@@ -1,0 +1,9 @@
+.footer{
+    display: flex;
+    /* width:100%; */
+    justify-content:right;
+    vertical-align: bottom;
+    font-size:30px;
+    /* position: sticky; */
+    float: right;
+}
