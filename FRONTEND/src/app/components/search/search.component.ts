@@ -62,7 +62,7 @@ export class SearchComponent implements OnInit {
             this.flashmessage.show("No result found.",{cssClass:'alert-danger text-center',timeOut:2000});
             this.students=[];
           }else{
-            this.students=results
+            this.students=results;
           }
         });
       }

@@ -28,10 +28,10 @@
         <li *ngIf="!authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
           <a class="nav-link" [routerLink]="['/about']">About</a>
         </li>  
-        <li *ngIf="!authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" title="Click here to Send Feedback or Give Any Educational Issue">
+        <li *ngIf="!authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" title="Click here to Give Feedback or Send Any Educational Issue">
           <a class="nav-link" [routerLink]="['/contact']">Contact-Us</a>
         </li>
-        <li *ngIf="!authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" title="Click here for any Technical Issues">
+        <li *ngIf="!authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" title="Click here to Send any Technical Issues">
           <a class="nav-link" [routerLink]="['/contactadmin']">Contact-Admin</a>
         </li>
         <li *ngIf="!authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
@@ -53,7 +53,7 @@
         </li>
         <li *ngIf="authService.adminLoggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
           <div class="dropdown float-right" >
-            <select class="btn btn-primary btn-md dropdown-toggle p-23" type="button" data-toggle="dropdown" name="pselect" [(ngModel)]="pselect" (change)="getuser()">
+            <select class="btn btn-primary btn-sm dropdown-toggle p-23" type="button" data-toggle="dropdown" name="pselect" [(ngModel)]="pselect" (change)="getuser()">
             <option value=undefined selected>Manage Users</option>
             <option value='hod'>HOD</option>
             <option value='tpo'>TPO</option>
