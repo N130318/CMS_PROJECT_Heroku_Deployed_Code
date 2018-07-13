@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forget',
@@ -12,7 +13,8 @@ export class ForgetComponent implements OnInit {
 
   constructor(
     private authService:AuthService,
-    private flashmessage:FlashMessagesService
+    private flashmessage:FlashMessagesService,
+    private router:Router
   ) { }
 
   ngOnInit() {
@@ -37,5 +39,8 @@ export class ForgetComponent implements OnInit {
       });
     }
   }
-
+  cancelClick()
+  {
+    this.router.navigate(['/login']);
+  }
 }

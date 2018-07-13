@@ -202,7 +202,7 @@
               <div class="card" >
                 <div class="card-header text-center" style="background-color: wheat"><h6>{{post.title}}</h6>
                   <button style="float:right;" class="btn btn-primary" *ngIf="authService.hodLoggedIn()||authService.tpoLoggedIn()" (click)="showeditpost(post)" >Edit</button>
-                  <button style="float:right;" class="btn btn-primary" *ngIf="authService.hodLoggedIn()||authService.tpoLoggedIn()" (click)="deletepost(post)">Delete</button>
+                  <button style="float:right; margin-right:5px;" class="btn btn-primary" *ngIf="authService.hodLoggedIn()||authService.tpoLoggedIn()" (click)="deletepost(post)">Delete</button> &nbsp; &nbsp;&nbsp;
                 </div>
                 <div class="card-body">
                   <p>{{post.content}}</p>
