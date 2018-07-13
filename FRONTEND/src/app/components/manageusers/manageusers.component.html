@@ -14,6 +14,7 @@
                 <th>E-Mail</th>
                 <th *ngIf="authService.adminLoggedIn()">Opearation</th>
                 <th *ngIf="authService.adminLoggedIn()">Opearation</th>
+                <th *ngIf="authService.adminLoggedIn()">Opearation</th>
             </tr>
         </thead>
       <!--Table head-->
@@ -30,6 +31,8 @@
                 <td>{{rec.email}}</td>
                 <td *ngIf="authService.adminLoggedIn()"><input type="button" (click)="delete(rec)" value="Delete" class="btn btn-danger"></td>
                 <td *ngIf="authService.adminLoggedIn()"><a class="nav-link" [routerLink]="['/add']"><input type="button" (click)="update(rec)" value="Update" class="btn btn-primary"></a></td>
+                <td *ngIf="(authService.adminLoggedIn()) && (rec.phone!=''&&rec.phone!=undefined)"><input type="button" (click)="senddata(rec)" value="Send E-Mail To Phone" class="btn btn-primary btn-sm"></td>
+                <td *ngIf="(authService.adminLoggedIn()) && (rec.phone==''||rec.phone==undefined)"><input type="button" (click)="senddata(rec)" value="Send E-Mail To Phone" disabled="disabled" class="btn btn-primary btn-sm" title="User Not Updated Profile,Mobile Number Not Available"></td>
             </tr>
         </tbody>
         <!--Table body-->

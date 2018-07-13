@@ -76,6 +76,19 @@ export class ManageusersComponent implements OnInit {
         }
       });
   }
+  senddata(student){
+    this.authService.send_mail_to_phone(student).subscribe(res=>{
+      if(res.success)
+      {
+        //this.flash.show(res.msg,{cssClass:'alert-success text-center',timeOut:2000});
+        alert(res.msg);
+      }
+      else{
+        //this.flash.show("Something went wrong.",{cssClass:'alert-alert text-center',timeOut:2000});
+        alert(res.msg);
+      }
+    });
+  }
   delete(hod){
     //console.log(hod);
     var retVal = confirm("Are you sure to Delete?");

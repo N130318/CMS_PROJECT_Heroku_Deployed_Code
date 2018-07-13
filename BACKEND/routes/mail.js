@@ -163,6 +163,7 @@ router.post('/send_user_req', (req, res) => {
                 client.messages.create({
                     from: '+17062568730',
                     to: '+919494918564',
+                    //to:user.phone
                     body: "Dear User,Your Request succefully sent,Regarding"+subject+",If you not did this write request at contact-admin"
                   }).then((message) => console.log(message.sid));
                   //Sending Confirmation to user e-mail
@@ -289,6 +290,7 @@ router.post('/send_user_req', (req, res) => {
                 client.messages.create({
                     from: '+17062568730',
                     to: '+919494918564',
+                    //to:userdata.phone
                     body: "Dear User,Your Request succefully sent,Regarding"+subject+",If you not did this write request at contact-admin"
                   }).then((message) => console.log(message.sid));
                   //Sending Confirmation to user e-mail
@@ -415,6 +417,7 @@ router.post('/send_user_req', (req, res) => {
                 client.messages.create({
                     from: '+17062568730',
                     to: '+919494918564',
+                    //to:userdata.phone
                     body: "Dear User,Your Request succefully sent,Regarding"+subject+",If you not did this write request at contact-admin"
                   }).then((message) => console.log(message.sid));
                   //Sending Confirmation to user e-mail

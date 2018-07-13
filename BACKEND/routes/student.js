@@ -5,6 +5,9 @@ const Student = require('../models/studentmodel');
 const HOD = require('../models/hodmodel');
 const TPO = require('../models/tpomodel');
 var fs=require('fs');
+const accountSid = 'AC185b0e6905c3b98ed0f49dbc1aedbda5';
+const authToken = 'a0205c20c7ab323e31d0bb286c228047';
+const client = require('twilio')(accountSid, authToken);
 
 router.get('/getstudent/:userid', function(req, res, next) {
     Student.getStudentByUserId(req.params.userid,function(err,student){
@@ -18,6 +21,42 @@ router.get('/getstudentbydeptyear/:dept/:year', function(req, res, next) {
   Student.getStudentByDeptYear(req.params.dept,req.params.year,function(err,userdata){
     res.json(userdata);
   });
+});
+
+router.get('/send_resp_to_phone/:userid/:role', function(req, res, next) {
+  if(req.params.role=="student")
+  Student.getStudentByUserId(req.params.userid,function(err,userdata){
+    console.log(userdata);
+    client.messages.create({
+      from: '+17062568730',
+      //to:userdata.phone
+      to: '+919494918564',
+      body:"Dear User,Your Email is:"+userdata.email+",with userid:"+userdata.userid+",Thanks for Contacting"
+    }).then((message) => console.log(message.sid)); res.json({success:true,msg:"Message Sent Suucessfully"});
+  });
+  else if(req.params.role=="hod")
+  HOD.getHodByUserId(req.params.userid,function(err,userdata){
+    console.log(userdata);
+    client.messages.create({
+      from: '+17062568730',
+      //to:userdata.phone
+      to: '+919494918564',
+      body:"Dear User,Your Email is:"+userdata.email+",with userid:"+userdata.userid+",Thanks for Contacting"
+    }).then((message) => console.log(message.sid)); res.json({success:true,msg:"Message Sent Suucessfully"});
+  });
+  else if(req.params.role=="tpo")
+  TPO.getTpoByUserId(req.params.userid,function(err,userdata){
+    console.log(userdata);
+    client.messages.create({
+      from: '+17062568730',
+      //to:userdata.phone
+      to: '+919494918564',
+      body:"Dear User,Your Email is:"+userdata.email+",with userid:"+userdata.userid+",Thanks for Contacting"
+    }).then((message) => console.log(message.sid)); res.json({success:true,msg:"Message Sent Suucessfully"});
+  });
+  else{
+    res.json({success:false,msg:"User Role Not Found"})
+  }
 });
 
 router.get('/tposearch',function(req,res,next){

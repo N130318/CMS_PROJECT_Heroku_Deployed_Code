@@ -66,6 +66,10 @@ export class AuthService {
     return this.http.delete("student/delete/"+userid)
       .map(res =>  res.json());
   }
+  send_mail_to_phone(user){
+    return this.http.get("student/send_resp_to_phone/"+user.userid+"/"+user.role)
+    .map(res =>  res.json());
+  }
 
   
   SearchStudents(basedon){
