@@ -185,7 +185,7 @@ export class ProfileComponent implements OnInit {
     }
     else
     {
-      this.flashmessage.show("Please Fill All The Fields",{cssClass:'alert-danger text-center',timeOut:2000});
+      this.flashmessage.show("Please Provide Correct Input in All Fields",{cssClass:'alert-danger text-center',timeOut:2000});
     }
 }
 

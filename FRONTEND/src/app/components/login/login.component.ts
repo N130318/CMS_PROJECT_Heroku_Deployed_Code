@@ -42,6 +42,15 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['login']);
         }
       });
+    }
   }
-}
+  keyPressText(event: any) {
+    //console.log("On Change Event Fired");
+    const pattern = /[a-zA-Z0-9 \-\'\_\@\.]/;
+
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
 }

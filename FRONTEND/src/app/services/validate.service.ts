@@ -41,7 +41,7 @@ export class ValidateService {
   validateUpdateFields(user){
     if((user.role=="hod"||user.role=="student")&&(user.dept==undefined||user.dept==""))
       return false;
-    else if((user.role=="hod"||user.role=="student"||user.role=="tpo")&&(user.email==undefined||user.email==""))
+    else if((user.role=="hod"||user.role=="student"||user.role=="tpo")&&((user.email==undefined||user.email=="")||!this.validateEmail(user.email)))
       return false;
     else
       return true;
@@ -54,7 +54,7 @@ export class ValidateService {
       return false;
     else if((user.role=="hod"||user.role=="student")&&(user.dept==undefined||user.dept==""))
       return false;
-    else if((user.role=="hod"||user.role=="tpo"||user.role=="student")&&(user.email==undefined||user.email==""))
+    else if((user.role=="hod"||user.role=="tpo"||user.role=="student")&&((user.email==undefined||user.email=="")||!this.validateEmail(user.email)))
       return false;
     else if((user.role=="admin")&&(user.password==undefined||user.password==""))
       return false;
@@ -67,6 +67,9 @@ export class ValidateService {
      return false;
     else if(student.name==""||student.dob==""||student.year==""||student.aggregate==""||student.email==""||student.phone==""||student.address=="")
       return false;
+    else if((student.email==""||student.email==undefined)||!this.validateEmail(student.email)){
+        return false;
+    }
     else 
       return true;
   }
@@ -76,6 +79,9 @@ export class ValidateService {
      return false;
     else if(hod.name==""||hod.qualification==""||hod.email==""||hod.phone==""||hod.address=="")
       return false;
+    else if((hod.email==""||hod.email==undefined)||!this.validateEmail(hod.email)){
+        return false;
+    }
     else 
       return true;
   }
@@ -85,17 +91,23 @@ export class ValidateService {
      return false;
     else if(tpo.name==""||tpo.qualification==""||tpo.email==""||tpo.phone==""||tpo.address=="")
       return false;
+    else if((tpo.email==""||tpo.email==undefined)||!this.validateEmail(tpo.email)){
+        return false;
+    }
     else 
       return true;
   }
 
 
   validateFeed(obj){
-    if(obj.firstname==""||obj.lastname==""||obj.country==""||obj.state==""||obj.zip==""||obj.email==""||obj.feedback==""||obj.address==""){
+    if(obj.firstname==""||obj.lastname==""||obj.country==""||obj.state==""||obj.zip==""||obj.feedback==""||obj.address==""){
       return false;
     }
-    else if(obj.firstname==undefined||obj.lastname==undefined||obj.country==undefined||obj.state==undefined||obj.zip==undefined||obj.email==undefined||obj.feedback==undefined||obj.address==undefined){
+    else if(obj.firstname==undefined||obj.lastname==undefined||obj.country==undefined||obj.state==undefined||obj.zip==undefined||obj.feedback==undefined||obj.address==undefined){
       return false;
+    }
+    else if((obj.email==""||obj.email==undefined)||!this.validateEmail(obj.email)){
+      return false; 
     }
     else {
       return true;

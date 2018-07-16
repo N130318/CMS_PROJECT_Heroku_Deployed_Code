@@ -1,5 +1,5 @@
 <div class="container login">
-    <form (submit)="onLoginSubmit()">
+    <form (submit)="onLoginSubmit()" ngNativeValidate>
             <div class="text-center mb-4">
                     <h1 class="h3 mb-3 font-weight-normal">
                         <font class="text-white">Login</font>
@@ -10,7 +10,7 @@
         </div>
     <div class="col-md-4">
         <div class="form-group">
-            <input type="text" name="userid" [(ngModel)]="userid" class="form-control" placeholder="UserID" required>
+            <input type="text" name="userid" [(ngModel)]="userid" class="form-control" placeholder="UserID" required (keypress)="keyPressText($event)">
   
           </div>
   

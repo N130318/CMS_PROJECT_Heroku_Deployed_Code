@@ -9,7 +9,7 @@
                   <img [src]="'uploads/'+image" class="rounded-circle img-thumbnail">
                   <h5>{{name}}&nbsp;<sub><small>{{qualification}}</small></sub></h5>
 
-                  <span>{{role.toUpperCase()}} : {{dept}}</span>
+                  <span>{{role | uppercase}} : {{dept}}</span>
 
                   <hr>
                   <label  class="btn btn-success btn-sm">{{email}}</label>&nbsp;

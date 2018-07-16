@@ -17,7 +17,8 @@ export class ResetComponent implements OnInit {
   constructor(
     private authservice:AuthService,
     private flash:FlashMessagesService,
-    private router:Router
+    private router:Router,
+    private authService:AuthService
   ) { }
 
   ngOnInit() {
@@ -40,10 +41,8 @@ export class ResetComponent implements OnInit {
        this.authservice.changePassword(obj).subscribe(result =>{
          if(result.success){
           this.flash.show(result.msg,{cssClass:'alert-success text-center',timeOut:2000});
-          if(!this.authservice.adminLoggedIn())
-            this.router.navigate(['/profile']);
-          else
-          this.router.navigate(['/add']);
+            this.authService.logOut();
+            this.router.navigate(['/login']);
          }
          else{
           this.flash.show(result.msg,{cssClass:'alert-danger text-center',timeOut:2000});

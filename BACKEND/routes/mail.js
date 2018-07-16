@@ -13,6 +13,7 @@ var store=require("store");
 const accountSid = 'AC185b0e6905c3b98ed0f49dbc1aedbda5';
 const authToken = 'a0205c20c7ab323e31d0bb286c228047';
 const client = require('twilio')(accountSid, authToken);
+var conf;
 
 router.get('/', function(req, res, next) {
     res.send('respond with a resource:mail');
@@ -94,7 +95,6 @@ router.post('/send_user_req', (req, res) => {
     if(userrole=='student')
     {
         Student.findOne({ $or: [ { email: useremailoruid }, {userid:useremailoruid } ] },function(err,user){
-            useremail=user.email;
             console.log(useremail);
             console.log(user);
             if(err)
@@ -108,6 +108,7 @@ router.post('/send_user_req', (req, res) => {
             }
             else
             {
+                useremail=user.email;
                 const output = `
             <p> Dear Admin, You have a new Technical Issue</p>
             <h3>Request Details</h3>
@@ -160,12 +161,17 @@ router.post('/send_user_req', (req, res) => {
                 //Send same mail with to as reply-to in mail with auto reply in case of forgot user name
                 //is-autoreply
                 });
+                if(user.phone!=undefined){
                 client.messages.create({
                     from: '+17062568730',
                     to: '+919494918564',
                     //to:user.phone
                     body: "Dear User,Your Request succefully sent,Regarding"+subject+",If you not did this write request at contact-admin"
-                  }).then((message) => console.log(message.sid));
+                  }).then((message) => console.log(message.sid));conf=true;}
+                else{
+                    console.log();
+                    conf=false;
+                }
                   //Sending Confirmation to user e-mail
                   const output1 = `
             <p>Dear Student, Your Request Confirmation</p>
@@ -220,14 +226,18 @@ router.post('/send_user_req', (req, res) => {
                 //Send same mail with to as reply-to in mail with auto reply in case of forgot user name
                 //is-autoreply
                 });
-                res.json({msg:"Request Sent Successfully and a Confirmation Sent your Mobile and E-mail",success:"true"});
+                if(conf){
+                    res.json({msg:"Request Sent Successfully and a Confirmation Sent your Mobile and E-mail",success:"true"});
                 }
-                });
+                else{
+                    res.json({msg:"Request Sent Successfully and a Confirmation Sent your E-mail.In case if you forgot email or lost email,Then ask chat bot as forgot password or update password you will get guidelines.",success:"true"});
+                }
+            }
+        });
     }
     else if(userrole=='hod')
     {
         HOD.findOne({ $or: [ { email: useremailoruid }, {userid:useremailoruid } ] },function(err,user){
-            useremail=user.email;
             if(err)
             {
                 throw err;
@@ -238,6 +248,7 @@ router.post('/send_user_req', (req, res) => {
                 res.json({sucess:false,msg:"Please Provide Valid Email Id and Role"})
             }
             else{
+                useremail=user.email;
                 const output = `
             <p>Dear Admin, You have a new Technical Issue:</p>
             <h3>Request Details</h3>
@@ -287,12 +298,18 @@ router.post('/send_user_req', (req, res) => {
                 console.log("The message was sent!");
                 console.log(info);
                 });
+                if(user.phone!=undefined){
                 client.messages.create({
                     from: '+17062568730',
                     to: '+919494918564',
                     //to:userdata.phone
                     body: "Dear User,Your Request succefully sent,Regarding"+subject+",If you not did this write request at contact-admin"
-                  }).then((message) => console.log(message.sid));
+                  }).then((message) => console.log(message.sid));conf=true;
+                }
+                else{
+                    console.log("Phone Number Unavailable");
+                    conf=false;
+                }
                   //Sending Confirmation to user e-mail
                   const output1 = `
             <p>Dear HOD, Your Request Confirmation</p>
@@ -347,14 +364,18 @@ router.post('/send_user_req', (req, res) => {
                 //Send same mail with to as reply-to in mail with auto reply in case of forgot user name
                 //is-autoreply
                 });
-                res.json({msg:"Request Sent Successfully and a Confirmation Sent your Mobile and E-mail",success:"true"});
-                    }
-                });
+                if(conf){
+                    res.json({msg:"Request Sent Successfully and a Confirmation Sent your Mobile and E-mail",success:"true"});
+                }
+                else{
+                    res.json({msg:"Request Sent Successfully and a Confirmation Sent your E-mail.In case if you forgot email or lost email,Then ask chat bot as forgot password or update password you will get guidelines.",success:"true"});
+                }
+            }
+        });
     }
     else if(userrole=='tpo')
     {
         TPO.find({ $or: [ { email: useremailoruid }, {userid:useremailoruid } ] },function(err,user){
-            useremail=user.email;
             if(err)
             {
                 throw err;
@@ -365,6 +386,7 @@ router.post('/send_user_req', (req, res) => {
                 res.json({sucess:false,msg:"Please Provide Valid Email Id and Role"})
             }
             else{
+                useremail=user.email;
                 const output = `
             <p>Dear Admin, You have a new Technical Issue:</p>
             <h3>Request Details</h3>
@@ -414,12 +436,18 @@ router.post('/send_user_req', (req, res) => {
                 console.log("The message was sent!");
                 console.log(info);
                 });
+                if(user.phone!=undefined){
                 client.messages.create({
                     from: '+17062568730',
                     to: '+919494918564',
                     //to:userdata.phone
                     body: "Dear User,Your Request succefully sent,Regarding"+subject+",If you not did this write request at contact-admin"
-                  }).then((message) => console.log(message.sid));
+                  }).then((message) => console.log(message.sid));conf=true;
+                }
+                else{
+                    console.log("Phone Number Unavailable");
+                    conf=false;
+                }
                   //Sending Confirmation to user e-mail
                   const output1 = `
             <p>Dear TPO, Your Request Confirmation</p>
@@ -474,9 +502,14 @@ router.post('/send_user_req', (req, res) => {
                 //Send same mail with to as reply-to in mail with auto reply in case of forgot user name
                 //is-autoreply
                 });
-                res.json({msg:"Request Sent Successfully and a Confirmation Sent your Mobile and E-mail",success:"true"});
-                    }
-                });
+                if(conf){
+                    res.json({msg:"Request Sent Successfully and a Confirmation Sent your Mobile and E-mail",success:"true"});
+                }
+                else{
+                    res.json({msg:"Request Sent Successfully and a Confirmation Sent your E-mail.In case if you forgot email or lost email,Then ask chat bot as forgot password or update password you will get guidelines.",success:"true"});
+                }
+            }
+        });
     }
     else{
         res.json({msg:"Please Choose Valid Role",success:"false"});

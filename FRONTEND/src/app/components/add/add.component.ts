@@ -12,6 +12,7 @@ import { OnDestroy } from '@angular/core';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit,OnDestroy {
+  usertype:String="USER";
   userid: String;
   password: string;
   role: String;
@@ -31,6 +32,10 @@ export class AddComponent implements OnInit,OnDestroy {
     this.selectedUser=this.authService.selectedUser;
     this.compoType=this.authService.compType;
     //console.log(this.selectedUser);
+    if(this.toggleform)
+    {
+      this.usertype=this.selectedUser.role;
+    }
   }
   ngOnDestroy()
   {
@@ -39,6 +44,7 @@ export class AddComponent implements OnInit,OnDestroy {
           if(this.compoType=="update")
           {
             this.authService.toggleForm=!this.authService.toggleForm;
+            this.usertype="USER";
             console.log ("User does not wants to continue!");
             return ;
           }
@@ -62,7 +68,7 @@ export class AddComponent implements OnInit,OnDestroy {
       email:this.email
     };
     if(!this.validateService.validateAddFields(obj)){
-      this.flashmessage.show('All fields are required',{cssClass:'alert-danger text-center',timeOut:2000});
+      this.flashmessage.show('Please Provide Correct Input in All Fields',{cssClass:'alert-danger text-center',timeOut:2000});
     }
     else{
       this.authService.addUser(obj).subscribe(data =>{
@@ -93,24 +99,30 @@ export class AddComponent implements OnInit,OnDestroy {
     };
     console.log(obj);
     if(!this.validateService.validateUpdateFields(obj)){
-      this.flashmessage.show('All fields are required',{cssClass:'alert-danger text-center',timeOut:2000});
+      this.flashmessage.show('Please Provide Correct Input in All Fields',{cssClass:'alert-danger text-center',timeOut:2000});
     }
     else{
       this.authService.updateUser(form.value.userid,obj).subscribe(data =>{
         console.log(data);
         if(data.success){
           this.flashmessage.show(data.msg,{cssClass:'alert-success text-center',timeOut:2000});
-          this.authService.toggleForm=!this.authService.toggleForm;
-          this.router.navigate(['/search']);
-          this.userid="";
-          this.role="";
-          this.dept="";
-          this.email="";
+          setTimeout((router: Router) => { //Delays Execution for 5 Seconds
+              this.router.navigate(['/home']);
+              this.authService.toggleForm=!this.authService.toggleForm;
+              form.reset();
+          }, 1000);
         }else{
           this.flashmessage.show(data.msg,{cssClass:'alert-danger text-center',timeOut:2000});
           this.router.navigate(['/add']);
         }
       });
+    }
+  }
+  public onChange(event : any): void {  // event will give you full breif of action
+    this.usertype=event;
+    console.log(this.usertype);
+    if(this.usertype=="undefined"){
+      this.usertype="USER";
     }
   }
   isStudentOrHod(){

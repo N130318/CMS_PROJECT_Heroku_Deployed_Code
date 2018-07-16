@@ -73,7 +73,7 @@
               <td>{{rec.dept}}</td>
               <td>{{rec.email}}</td>
               <td *ngIf="authService.adminLoggedIn()"><input type="button" (click)="deletestudent(rec)" value="Delete" class="btn btn-danger btn-md"></td>
-              <td *ngIf="authService.adminLoggedIn()"><a class="nav-link" [routerLink]="['/add']"><input type="button" (click)="updatestudent(rec)" value="Update" class="btn btn-primary btn-md"></a></td>
+              <td *ngIf="authService.adminLoggedIn()"><input type="button" (click)="updatestudent(rec)" value="Update" class="btn btn-primary btn-md"></td>
               <td *ngIf="(authService.adminLoggedIn()) && (rec.phone!=''&&rec.phone!=undefined)"><input type="button" (click)="senddata(rec)" value="Send E-Mail To Phone" class="btn btn-primary btn-sm"></td>
               <td *ngIf="(authService.adminLoggedIn()) && (rec.phone==''||rec.phone==undefined)"><input type="button" (click)="senddata(rec)" value="Send E-Mail To Phone" disabled="disabled" class="btn btn-primary btn-sm" title="User Not Updated Profile,Mobile Number Not Available"></td>
           </tr>

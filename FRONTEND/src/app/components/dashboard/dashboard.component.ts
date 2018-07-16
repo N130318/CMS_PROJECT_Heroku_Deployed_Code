@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.user=JSON.parse(localStorage.getItem('user'));
+    this.checkprofile();
     if(this.user.role=='student'){
     this.postService.getStudentPosts(this.user.dept,this.user.year).subscribe(posts=>{
       this.posts=posts;
@@ -53,6 +54,11 @@ export class DashboardComponent implements OnInit {
 
       }
     }
+    checkprofile(){
+      if(this.user.role!='admin'&&(this.user.name==""||this.user.name==undefined||this.user.phone==""||this.user.phone==undefined||this.user.address==""||this.user.address==undefined||this.user.image=="abc")){
+        this.flashmessage.show("Dear "+this.user.userid+",Your Profile Not Updated. Please Goto Profile and Update",{cssClass:'alert-danger text-center',timeOut:2000})
+      }
+    }
   onPostClick(){
     var postObj={
       postedby:this.user.userid,
@@ -68,7 +74,6 @@ export class DashboardComponent implements OnInit {
     if(postObj.title==""||postObj.title==undefined||postObj.content==""||postObj.content==undefined||postObj.year==undefined)
     {
       this.flashmessage.show("All fields are required.",{cssClass:'alert-danger text-center',timeOut:2000})
-
     }
     else
     {
@@ -103,12 +108,6 @@ export class DashboardComponent implements OnInit {
 	    dept:form.value.dept,
       prole:this.user.role
     }
-    console.log(form.value.title+""+form.value.content+""+form.value.year+""+form.value.dept);
-    console.log(this.selectedPost._id);
-    console.log(postObj._id);
-    console.log(form.value.dept);
-    console.log(this.user.userid+""+this.user.role)
-    console.log("After click:"+postObj);
     if(this.authService.tpoLoggedIn()){
       postObj.dept=form.value.dept;
     }
@@ -129,10 +128,8 @@ export class DashboardComponent implements OnInit {
           if(result.success==true){
             this.flashmessage.show(result.msg,{cssClass:'alert-success text-center',timeOut:2000});
             this.posts.unshift(postObj);
-            this.title="";
-            this.content="";
-            this.year=undefined;
-            this.dept=undefined;
+            form.reset();
+            this.postedit=false;
           }
           else{
             this.flashmessage.show("Something went wrong.",{cssClass:'alert-success text-center',timeOut:2000});
@@ -158,11 +155,8 @@ export class DashboardComponent implements OnInit {
   showeditpost(post){
     this.selectedPost=post;
     this.postedit=!this.postedit;
-    console.log(this.selectedPost);
-    console.log(post);
   }
   deletepost(post){
-    console.log(post);
     var retVal = confirm("Are you sure to Delete?");
     if( retVal == true)
     {

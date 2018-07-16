@@ -50,20 +50,20 @@
             <font color="white">
                 <h3>Please fill in your details</h3>
             </font>
-            <form (submit)="onFeed()">
-            <div class="needs-validation " novalidate>
+            <form (submit)="onFeed()" ngNativeValidate>
+            <div class="needs-validation">
                 
                 <div class="row ">
                     <div class="col-md-6 mb-3 ">
                         <label for="firstName"><font color="white">First name</font></label>
-                        <input type="text " class="form-control " name="firstName " placeholder="" [(ngModel)]="firstname" required>
+                        <input type="text " class="form-control " name="firstName " placeholder="Enter Your First Name" [(ngModel)]="firstname" required (keypress)="keyPressText($event)">
                         <div class="invalid-feedback ">
                             Valid first name is required.
                         </div>
                     </div>
                     <div class="col-md-6 mb-3 ">
                         <label for="lastName "><font color="white">Last name</font></label>
-                        <input type="text " class="form-control " name="lastName " placeholder="" value="" [(ngModel)]="lastname" required>
+                        <input type="text " class="form-control " name="lastName " placeholder="Enter your Last Name" value="" [(ngModel)]="lastname" required (keypress)="keyPressText($event)">
                         <div class="invalid-feedback ">
                             Valid last name is required.
                         </div>
@@ -98,7 +98,7 @@
 
                 <div class="mb-3 ">
                     <label for="email "><font color="white">Email</font> <span class="text-muted "></span></label>
-                    <input type="email " class="form-control " name="email " [(ngModel)]="email" placeholder="you@example.com ">
+                    <input type="email" class="form-control " name="email " [(ngModel)]="email" placeholder="you@example.com " (keypress)="keyPressText($event)" required="required">
                     <div class="invalid-feedback ">
                         Please enter a valid email address to help us get in touch with you.
                     </div>
@@ -106,7 +106,7 @@
 
                 <div class="mb-3 ">
                     <label for="address "><font color="white">Address</font></label>
-                    <input type="text " class="form-control " name="address " [(ngModel)]="address" placeholder="1234 Main St " required>
+                    <input type="text" class="form-control " name="address " [(ngModel)]="address" placeholder="1234 Main St " required="required" (keypress)="keyPressText($event)">
                     <div class="invalid-feedback ">
                         Please enter your address.
                     </div></div>
@@ -114,14 +114,14 @@
 
                     <div class="mb-3 ">
                         <label for="address2 "><font color="white">Feedback</font> <span class="text-muted "></span></label>
-                        <textarea rows="4" cols="50" name="feedback" [(ngModel)]="feedback" class="form-control"> </textarea>
+                        <textarea rows="4" cols="50" name="feedback"placeholder="Enter Your Feedback/Message" [(ngModel)]="feedback" class="form-control" (keypress)="keyPressText($event)" required="required"> </textarea>
                     </div>
 
                     <div class="row ">
                         <div class="col-md-5 mb-3 ">
                             <label for="country "><font color="white">Country</font></label>
                             <select class="custom-select d-block w-100 " name="country" [(ngModel)]="country" required>
-                  <option [ngValue]="undefined" disabled selected>Choose...</option>
+                  <option [ngValue]="undefined" disabled selected>Choose Country...</option>
                   <option value="india">India</option>
                 </select>
                             <div class="invalid-feedback ">
@@ -131,7 +131,7 @@
                         <div class="col-md-4 mb-3 ">
                             <label for="state "><font color="white">State</font></label>
                             <select class="custom-select d-block w-100 " name="state" [(ngModel)]="state" required>
-                  <option [ngValue]="undefined" disabled selected>Choose...</option>
+                  <option [ngValue]="undefined" disabled selected>Choose Your State...</option>
                   <option value="AP">Andhra pradesh</option>
                   <option value="OD"> Odisha</option>
                   <option value="WB">West Bengal </option>
@@ -146,7 +146,7 @@
                         </div>
                         <div class="col-md-3 mb-3 ">
                             <label for="zip "><font color="white">Zip</font></label>
-                            <input type="text " class="form-control" name="zip" [(ngModel)]="zip" placeholder="" required>
+                            <input type="text" class="form-control" name="zip" [(ngModel)]="zip" placeholder="Enter Zip Code" required="required" maxlength="6" pattern="[5]{1}[0-9]{5}">
                             <div class="invalid-feedback ">
                                 Zip code required.
                             </div>

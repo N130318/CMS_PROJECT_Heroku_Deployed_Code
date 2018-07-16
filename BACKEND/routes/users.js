@@ -164,7 +164,6 @@ router.post('/adduser',function(req,res,next){
           if(err){
             res.json({success:false , msg:"Some Student Already Existed with Same UserID"});
           }else{
-            res.json({success:true , msg:"success in add student"});
             const output = `<p>Dear ${upperCase(req.body.role)},</p>
                             <h2>Login Credentials</h2>
                             <p>Please find your Login Credentials to CMS Account is</p>
@@ -211,6 +210,7 @@ router.post('/adduser',function(req,res,next){
                 console.log(info);
                 //res.json({"msg":"Mail Sent Successfully","succcess":"true"});
                 });
+                res.json({success:true , msg:"success in add student"});
           }
         });
       }
@@ -243,7 +243,6 @@ router.post('/adduser',function(req,res,next){
             res.json({success:false , msg:"HOD For this Dept Already exist."});
           }
           else{
-            res.json({success:true , msg:"success in add HOD."});
             const output = `<p>Dear ${upperCase(req.body.role)},</p>
                             <h2>Login Credentials</h2>
                             <p>Please find your Login Credentials to CMS Account is</p>
@@ -290,6 +289,7 @@ router.post('/adduser',function(req,res,next){
                 console.log(info);
                 //res.json({"msg":"Mail Sent Successfully","succcess":"true"});
                 });
+                res.json({success:true , msg:"success in add HOD."});
           }
         });
       }
@@ -310,7 +310,6 @@ router.post('/adduser',function(req,res,next){
           if(err){
             res.json({success:false , msg:"add TPO failed."});
           }else{
-            res.json({success:true , msg:"success in add TPO."});
             const output = `<p>Dear ${upperCase(req.body.role)},</p>
                             <h2>Login Credentials</h2>
                             <p>Please find your Login Credentials to CMS Account is:</p>
@@ -357,7 +356,7 @@ router.post('/adduser',function(req,res,next){
                 console.log(info);
                 //res.json({"msg":"Mail Sent Successfully","succcess":"true"});
                 });
-
+                res.json({success:true , msg:"success in add TPO."});
           }
         });
       }
@@ -368,7 +367,53 @@ router.post('/adduser',function(req,res,next){
       if(err){
         res.json({success:false , msg:"UserID Already Exist."});
       }else{
-        res.json({success:true , msg:"success in add admin."});
+        const output = `<p>Dear Developer / Maintainer,</p>
+                        <h2>New Admin Added</h2>
+                        <p>Please Check New Added Admin Data</p>
+                        <ul>  
+                          <li>User Name: ${req.body.userid}</li>
+                        </ul>
+                        <p>This is a Confirmation to you on Adding New Admin By Another Admin</p>
+                        <h3>Note:</h3>
+                        <p>You can Manage(Update/Delete) Admins Only through <a href="https://mlab.com">https://mlab.com</a></p>
+                        <p>You can use <a href="https://bcrypt-generator.com/">https://bcrypt-generator.com/</a>to Uodate Admin Password</p>`;
+            let transporter = nodemailer.createTransport({
+              host:"smtp.gmail.com",
+              service: "Gmail",
+              secure: false,
+              port: 465,
+              auth: {
+                type:"OAuth2",
+                user: "cms.feedback9144@gmail.com", // Your gmail address.
+                clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
+                clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
+                refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+                },
+              tls:
+              {
+                    rejectUnauthorized:false
+                }
+              });
+          
+            // setup email data with unicode symbols
+            let mailOptions = {
+                from: '"college manager" <cms.feedback9144@gmail.com>', // sender address
+                to: 'n130318@rguktn.ac.in',
+                //to: 'n130318@rguktn.ac.in', Developer or Maintainer E-mail 
+                subject: 'Regarding New Admin Creation', // Subject line
+                html: output // html body
+            };
+          
+            // send mail with defined transport object
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log("The message was sent!");
+                console.log(info);
+                //res.json({"msg":"Mail Sent Successfully","succcess":"true"});
+                });
+                res.json({success:true , msg:"success in add admin."});
       }
     });
   }
@@ -505,59 +550,80 @@ router.put('/updateuser/:userid',multer({dest:"./public/uploads/"}).single('imag
           if(err) throw err;
           else
           {
-            if(reqrddata.image=="abc")
+            if(reqrddata.image=="abc"||!fs.existsSync('./public/uploads/'+reqrddata.image))
             {
-              console.log('No Profile Pic Available');
+              console.log("Profile Pic Unavailable");
+              var stu={
+                name:req.body.name,
+                dob:req.body.dob,
+                phone:req.body.phone, 
+                email:req.body.email,
+                aggregate:req.body.aggregate,
+                address:req.body.address,
+                year:req.body.year
+              };
+              if(req.body.pic=="true"){
+                delete stu['pic'];
+                stu=Object.assign(stu,{image:req.file.filename});
+              }else{
+                delete stu['pic'];
+              }
+              Student.update({userid:req.params.userid},stu,function(err,result){
+                  if(err){
+                    console.log(err);
+                    res.json(err);}
+                  else if(result.n==1){
+                    res.json({success:true,msg:"Profile Updated Succesfully"});
+                    console.log(result); 
+                  }
+                  else{
+                    console.log(result);
+                    res.json({success:false,msg:JSON.stringify(result)});
+                  }
+                });
             }
             else
             {
-              if(fs.existsSync('./public/uploads/'+reqrddata.image))
-              {
                 try {
                   fs.unlink('./public/uploads/'+reqrddata.image, (err) => {
                     if (err) throw err;
                     console.log('successfully deleted /tmp/hello');
+                    var stu={
+                      name:req.body.name,
+                      dob:req.body.dob,
+                      phone:req.body.phone, 
+                      email:req.body.email,
+                      aggregate:req.body.aggregate,
+                      address:req.body.address,
+                      year:req.body.year
+                    };
+                    if(req.body.pic=="true"){
+                      delete stu['pic'];
+                      stu=Object.assign(stu,{image:req.file.filename});
+                    }else{
+                      delete stu['pic'];
+                    }
+                    Student.update({userid:req.params.userid},stu,function(err,result){
+                        if(err){
+                          console.log(err);
+                          res.json(err);}
+                        else if(result.n==1){
+                          res.json({success:true,msg:"Profile Updated Succesfully"});
+                          console.log(result); 
+                        }
+                        else{
+                          console.log(result);
+                          res.json({success:false,msg:JSON.stringify(result)});
+                        }
+                      });
                   });
                 } catch (err) {
                   // handle the error
                   if (err.code !== 'ENOENT') throw err;
                 }
-              }
-              else
-              {
-                console.log('File Not Found');
-              }
             }
           }
         });
-        var stu={
-            name:req.body.name,
-            dob:req.body.dob,
-            phone:req.body.phone, 
-            email:req.body.email,
-            aggregate:req.body.aggregate,
-            address:req.body.address,
-            year:req.body.year
-        };
-        if(req.body.pic=="true"){
-          delete stu['pic'];
-          stu=Object.assign(stu,{image:req.file.filename});
-        }else{
-          delete stu['pic'];
-        }
-        Student.update({userid:req.params.userid},stu,function(err,result){
-            if(err){
-              console.log(err);
-              res.json(err);}
-            else if(result.n==1){
-              res.json({success:true,msg:"Profile Updated Succesfully"});
-              console.log(result); 
-            }
-            else{
-              console.log(result);
-              res.json({success:false,msg:JSON.stringify(result)});
-            }
-          });
       }
       //Update HOD
       else if(user.role=="hod")
@@ -566,53 +632,68 @@ router.put('/updateuser/:userid',multer({dest:"./public/uploads/"}).single('imag
           if(err) throw err;
           else
           {
-            if(reqrddata.image=="abc")
+            if(reqrddata.image=="abc"||!fs.existsSync('./public/uploads/'+reqrddata.image))
             {
-              console.log('No Profile Pic Available');
+              console.log("Profile Pic Unavailable");
+              var hod={
+                name:req.body.name,
+                qualification:req.body.qualification,
+                phone:req.body.phone, 
+                email:req.body.email,
+                address:req.body.address
+              };
+              if(req.body.pic=="true"){
+                delete hod['pic'];
+                hod=Object.assign(hod,{image:req.file.filename});
+              }else{
+                delete hod['pic'];
+              }
+              HOD.update({userid:req.params.userid},hod,function(err,result){
+                if(err){
+                  res.json(err);}
+                else if(result.n==1){
+                  res.json({success:true,msg:"Profile Updated Succesfully"}); 
+                }else{
+                  res.json({success:false,msg:JSON.stringify(result)});
+                }
+              });
             }
             else
             {
-              if(fs.existsSync('./public/uploads/'+reqrddata.image))
-              {
                 try {
                   fs.unlink('./public/uploads/'+reqrddata.image, (err) => {
                     if (err) throw err;
                     console.log('successfully deleted /tmp/hello');
+                    var hod={
+                      name:req.body.name,
+                      qualification:req.body.qualification,
+                      phone:req.body.phone, 
+                      email:req.body.email,
+                      address:req.body.address
+                    };
+                    if(req.body.pic=="true"){
+                      delete hod['pic'];
+                      hod=Object.assign(hod,{image:req.file.filename});
+                    }else{
+                      delete hod['pic'];
+                    }
+                    HOD.update({userid:req.params.userid},hod,function(err,result){
+                      if(err){
+                        res.json(err);}
+                      else if(result.n==1){
+                        res.json({success:true,msg:"Profile Updated Succesfully"}); 
+                      }else{
+                        res.json({success:false,msg:JSON.stringify(result)});
+                      }
+                    });
                   });
                 } catch (err) {
                   // handle the error
-                  if (err.code !== 'ENOENT') throw err;
+                    if (err.code !== 'ENOENT') throw err;
                 }
-              }
-              else
-              {
-                console.log('File Not Found');
-              }
             }
           }
         });
-        var hod={
-          name:req.body.name,
-          qualification:req.body.qualification,
-          phone:req.body.phone, 
-          email:req.body.email,
-          address:req.body.address
-      };
-      if(req.body.pic=="true"){
-        delete hod['pic'];
-        hod=Object.assign(hod,{image:req.file.filename});
-      }else{
-        delete hod['pic'];
-      }
-        HOD.update({userid:req.params.userid},hod,function(err,result){
-            if(err){
-              res.json(err);}
-            else if(result.n==1){
-              res.json({success:true,msg:"Profile Updated Succesfully"}); 
-            }else{
-              res.json({success:false,msg:JSON.stringify(result)});
-            }
-          });
       }
       //Update TPO
       else if(user.role=="tpo")
@@ -621,53 +702,69 @@ router.put('/updateuser/:userid',multer({dest:"./public/uploads/"}).single('imag
           if(err) throw err;
           else
           {
-            if(reqrddata.image=="abc")
+            if(reqrddata.image=="abc"||!fs.existsSync('./public/uploads/'+reqrddata.image))
             {
-              console.log('No Profile Pic Available');
+              console.log("Profile Pic Unavailable");
+              var tpo={
+                name:req.body.name,
+                qualification:req.body.qualification,
+                phone:req.body.phone, 
+                email:req.body.email,
+                address:req.body.address
+              }
+              if(req.body.pic=="true"){
+                delete tpo['pic'];
+                tpo=Object.assign(tpo,{image:req.file.filename});
+              }else{
+                delete tpo['pic'];
+              }
+              console.log(tpo.image);
+              TPO.update({userid:req.params.userid},tpo,function(err,result){
+                  if(err){
+                    res.json(err);}
+                  else if(result.n==1){
+                    res.json({success:true,msg:"Profile Updated Succesfully"}); 
+                  }else{
+                    res.json({success:false,msg:json.stringify(result)});
+                  }
+                });
             }
             else
             {
-              if(fs.existsSync('./public/uploads/'+reqrddata.image))
-              {
                 try {
                   fs.unlink('./public/uploads/'+reqrddata.image, (err) => {
                     if (err) throw err;
                     console.log('successfully deleted /tmp/hello');
-                  });
-                } catch (err) {
-                  // handle the error
-                  if (err.code !== 'ENOENT') throw err;
-                }
-              }
-              else
-              {
-                console.log('File Not Found');
-              }
-            }
-          }
-        });
-        var tpo={
-          name:req.body.name,
-          qualification:req.body.qualification,
-          phone:req.body.phone, 
-          email:req.body.email,
-          address:req.body.address
-        }
-        if(req.body.pic=="true"){
-          delete tpo['pic'];
-          tpo=Object.assign(tpo,{image:req.file.filename});
-        }else{
-          delete tpo['pic'];
-        }
-        TPO.update({userid:req.params.userid},tpo,function(err,result){
-            if(err){
-              res.json(err);}
-            else if(result.n==1){
-              res.json({success:true,msg:"Profile Updated Succesfully"}); 
-            }else{
-              res.json({success:false,msg:json.stringify(result)});
-            }
-          });
+                    var tpo={
+                        name:req.body.name,
+                        qualification:req.body.qualification,
+                        phone:req.body.phone, 
+                        email:req.body.email,
+                        address:req.body.address
+                      }
+                      if(req.body.pic=="true"){
+                        delete tpo['pic'];
+                        tpo=Object.assign(tpo,{image:req.file.filename});
+                      }else{
+                        delete tpo['pic'];
+                      }
+                      TPO.update({userid:req.params.userid},tpo,function(err,result){
+                          if(err){
+                            res.json(err);}
+                          else if(result.n==1){
+                            res.json({success:true,msg:"Profile Updated Succesfully"}); 
+                          }else{
+                            res.json({success:false,msg:json.stringify(result)});
+                          }
+                        });
+                    });
+                  } catch (err) {
+                                // handle the error
+                                if (err.code !== 'ENOENT') throw err;
+                            }
+                          }
+                        }
+                      });
       }
       else{
         console.log("Invalid Update");

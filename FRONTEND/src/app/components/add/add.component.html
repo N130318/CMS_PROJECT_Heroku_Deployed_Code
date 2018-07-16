@@ -2,7 +2,7 @@
     <form (submit)="onAddSubmit()" *ngIf="!toggleform">
         <div class="text-center mb-4">
             <h1 class="h3 mb-3 font-weight-normal">
-                <font class="text-white">ADD USER</font>
+                <font class="text-white">ADD {{usertype| uppercase}}</font>
             </h1>
         </div>
         <div class="row">
@@ -16,8 +16,8 @@
                     <input type="password" name="password" [(ngModel)]="password" class="form-control" placeholder="Enter password" required>
                 </div>
                 <div class="form-group">
-                    <select class="form-control" name="role" [(ngModel)]="role">
-                        <option disabled="disabled" selected>select role</option>
+                    <select class="form-control" name="role" [(ngModel)]="role" (ngModelChange)="onChange($event)">
+                        <option value="undefined" disabled="disabled" selected="selected">select role</option>
                         <option value="student">STUDENT</option>
                         <option value="hod">HOD</option>
                         <option value="tpo">TPO</option>
@@ -49,10 +49,10 @@
     </form>
 
     <!---Update User -->
-    <form #editform="ngForm" (ngSubmit)="onUpdateSubmit(editform)" *ngIf="toggleform">
+    <form #editform="ngForm" (ngSubmit)="onUpdateSubmit(editform)" *ngIf="toggleform" ngNativeValidate>
         <div class="text-center mb-4">
             <h1 class="h3 mb-3 font-weight-normal">
-                <font class="text-white">UPDATE USER</font>
+                <font class="text-white">UPDATE {{usertype| uppercase}}</font>
             </h1>
         </div>
         <div class="row">
@@ -66,8 +66,8 @@
                     <input type="password" name="password" [(ngModel)]="password" class="form-control" placeholder="Enter password" required>
                 </div>
                 <div class="form-group">
-                    <select class="form-control" name="role" [(ngModel)]="selectedUser.role">
-                        <option disabled="disabled" selected>select role</option>
+                    <select class="form-control" name="role" [(ngModel)]="selectedUser.role" (ngModelChange)="onChange($event)">
+                        <option value="undefined" disabled="disabled" selected>select role</option>
                         <option value="student">STUDENT</option>
                         <option value="hod">HOD</option>
                         <option value="tpo">TPO</option>

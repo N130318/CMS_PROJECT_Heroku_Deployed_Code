@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Student } from '../../models/student';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -152,6 +152,7 @@ deletestudent(student){
 updatestudent(student){
     this.authService.selectedUser=student;
     this.authService.toggleForm=!this.authService.toggleForm;
+    this.router.navigate(['/add']);
   }
 senddata(student){
   this.authService.send_mail_to_phone(student).subscribe(res=>{

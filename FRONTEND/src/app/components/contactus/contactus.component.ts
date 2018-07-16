@@ -41,7 +41,7 @@ export class ContactusComponent implements OnInit {
   zip:this.zip
     }
     if(!this.validate.validateFeed(obj)){
-      alert("all fields are required.");
+      alert("Please Provide Correct Input Data in All Fields.");
     }
     else{
       this.authService.feedback(obj).subscribe(res=>{
@@ -65,6 +65,12 @@ export class ContactusComponent implements OnInit {
       this.feedback="";
     }
   }
+  keyPressText(event: any) {
+    const pattern = /[a-zA-Z0-9 \-\'\_\@\.]/;
 
-
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
 }

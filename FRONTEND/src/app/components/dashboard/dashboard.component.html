@@ -16,8 +16,8 @@
                     <div class="form-group">
                       <textarea class="form-control"  placeholder="DESCRIPTION" name="content" [ngModel]="selectedPost.content" required></textarea>
                     </div>
-                    <input type="submit" class="btn btn-success" value="update post" style="float:right; border-radius: 8px;">
-                    <input type="button" class="btn btn-success" value="cancel" style="float:right; border-radius: 8px;" (click)="onCancelClick()">
+                    <input type="button" class="btn btn-danger" value="Cancel" style="float:right; border-radius: 8px;" (click)="onCancelClick()">
+                    <input type="submit" class="btn btn-success" value="Update Post" style="float:right; border-radius: 8px; margin-right:5px;">
                     <div>
                         <select class="btn btn-primary dropdown-toggle" data-toggle="dropdown" placeholder="year" type="button" style="float:left; margin-right:11px; border-radius: 8px;" name="year" [ngModel]="selectedPost.year">
                             <option [ngValue]="undefined" disabled selected>YEAR</option>
@@ -201,8 +201,8 @@
           <div *ngFor="let post of posts" style="padding-bottom: 1.5%;">
               <div class="card" >
                 <div class="card-header text-center" style="background-color: wheat"><h6>{{post.title}}</h6>
-                  <button style="float:right;" class="btn btn-primary" *ngIf="authService.hodLoggedIn()||authService.tpoLoggedIn()" (click)="showeditpost(post)" >Edit</button>
-                  <button style="float:right; margin-right:5px;" class="btn btn-primary" *ngIf="authService.hodLoggedIn()||authService.tpoLoggedIn()" (click)="deletepost(post)">Delete</button> &nbsp; &nbsp;&nbsp;
+                  <button style="float:right;" class="btn btn-danger" *ngIf="authService.hodLoggedIn()||authService.tpoLoggedIn()" (click)="deletepost(post)">Delete</button>
+                  <button style="float:right; margin-right:5px;" class="btn btn-primary" *ngIf="authService.hodLoggedIn()||authService.tpoLoggedIn()" (click)="showeditpost(post)" >Edit</button>
                 </div>
                 <div class="card-body">
                   <p>{{post.content}}</p>
