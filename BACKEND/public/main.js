@@ -177,7 +177,7 @@ var appRoutes = [
     { path: "login", component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_20__["LoginComponent"] },
     { path: "dashboard", component: _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_21__["DashboardComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]] },
     { path: "welcome", component: _components_welcome_welcome_component__WEBPACK_IMPORTED_MODULE_23__["WelcomeComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]] },
-    { path: "search", component: _components_search_search_component__WEBPACK_IMPORTED_MODULE_25__["SearchComponent"] },
+    { path: "search", component: _components_search_search_component__WEBPACK_IMPORTED_MODULE_25__["SearchComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"], _guards_admin_guard__WEBPACK_IMPORTED_MODULE_12__["AdminGuard"]] },
     { path: "profile", component: _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_22__["ProfileComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]] },
     { path: "add", component: _components_add_add_component__WEBPACK_IMPORTED_MODULE_24__["AddComponent"], canActivate: [_guards_admin_guard__WEBPACK_IMPORTED_MODULE_12__["AdminGuard"]] },
     { path: "forgot", component: _components_forget_forget_component__WEBPACK_IMPORTED_MODULE_26__["ForgetComponent"] },
@@ -251,7 +251,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ":root {\n    --jumbotron-padding-y: 3rem;\n}\n\n.container {\n    background-image: url(\"/assets/images/1.png\");\n}\n\n.jumbotron {\n    padding-top: var(--jumbotron-padding-y);\n    padding-bottom: var(--jumbotron-padding-y);\n    margin-bottom: 0;\n    background-color:transparent;\n    /* background-image: url(\"/assets/images/1.png\"); */\n    background-size: cover;\n}\n\n@media (min-width: 768px) {\n    .jumbotron {\n        padding-top: calc(var(--jumbotron-padding-y) * 2);\n        padding-bottom: calc(var(--jumbotron-padding-y) * 2);\n    }\n}\n\n.jumbotron p:last-child {\n    margin-bottom: 0;\n}\n\n.jumbotron-matter {\n    /* font-weight: 300; */\n    color:white;\n    font-size: 18px;\n}\n\n.jumbotron-heading {\n    /* font-weight: 300; */\n    color: #fff;\n}\n\n.jumbotron .container {\n    max-width: 40rem;\n}\n\nfooter {\n    padding-top: 3rem;\n    padding-bottom: 3rem;\n}\n\nfooter p {\n    margin-bottom: .25rem;\n}\n\n.box-shadow {\n    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);\n}\n\n.album {\n    background-image: url(\"/assets/images/1.png\");\n}"
+module.exports = ":root {\n    --jumbotron-padding-y: 3rem;\n}\n\n.container {\n    background-image: url(\"/assets/images/1.png\");\n}\n\n.jumbotron {\n    padding-top: var(--jumbotron-padding-y);\n    padding-bottom: var(--jumbotron-padding-y);\n    margin-bottom: 0;\n    background-color:transparent;\n    /* background-image: url(\"/assets/images/1.png\"); */\n    background-size: cover;\n}\n\n@media (min-width: 768px) {\n    .jumbotron {\n        padding-top: calc(var(--jumbotron-padding-y) * 2);\n        padding-bottom: calc(var(--jumbotron-padding-y) * 2);\n    }\n}\n\n.jumbotron p:last-child {\n    margin-bottom: 0;\n}\n\n.jumbotron-matter {\n    /* font-weight: 300; */\n    color:white;\n    font-size: 18px;\n}\n\n.jumbotron-heading {\n    /* font-weight: 300; */\n    color: #fff;\n}\n\n.jumbotron .container {\n    max-width: 40rem;\n}\n\nfooter {\n    padding-top: 3rem;\n    padding-bottom: 3rem;\n}\n\nfooter p {\n    margin-bottom: .25rem;\n}\n\n.box-shadow {\n    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);\n}\n\n.album {\n    background-image: url(\"/assets/images/1.png\");\n}\n\n.qr\n{\n    padding: 5px;\n}"
 
 /***/ }),
 
@@ -277,6 +277,8 @@ module.exports = "<div>\n\n    <div>\n        <main role=\"main\">\n\n          
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AboutComponent", function() { return AboutComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -287,10 +289,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var AboutComponent = /** @class */ (function () {
-    function AboutComponent() {
+    function AboutComponent(authService, router) {
+        this.authService = authService;
+        this.router = router;
     }
     AboutComponent.prototype.ngOnInit = function () {
+        if (this.authService.loggedIn()) {
+            this.router.navigate(['/home']);
+        }
     };
     AboutComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -298,7 +307,8 @@ var AboutComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./about.component.html */ "./src/app/components/about/about.component.html"),
             styles: [__webpack_require__(/*! ./about.component.css */ "./src/app/components/about/about.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], AboutComponent);
     return AboutComponent;
 }());
@@ -562,6 +572,8 @@ module.exports = "<div class=\"chatbot container p-25 text-center addstyle\">\n 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChatComponent", function() { return ChatComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -572,10 +584,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var ChatComponent = /** @class */ (function () {
-    function ChatComponent() {
+    function ChatComponent(authService, router) {
+        this.authService = authService;
+        this.router = router;
     }
     ChatComponent.prototype.ngOnInit = function () {
+        if (this.authService.loggedIn()) {
+            this.router.navigate(['/home']);
+        }
     };
     ChatComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -583,7 +602,7 @@ var ChatComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./chat.component.html */ "./src/app/components/chat/chat.component.html"),
             styles: [__webpack_require__(/*! ./chat.component.css */ "./src/app/components/chat/chat.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], ChatComponent);
     return ChatComponent;
 }());
@@ -599,7 +618,7 @@ var ChatComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".qr\r\n{\r\n    padding: 5px;\r\n}"
 
 /***/ }),
 
@@ -629,6 +648,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! angular2-flash-messages */ "./node_modules/angular2-flash-messages/module/index.js");
 /* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angular2_flash_messages__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _services_validate_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/validate.service */ "./src/app/services/validate.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -642,13 +662,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var ContactadminComponent = /** @class */ (function () {
-    function ContactadminComponent(authService, flash, validate) {
+    function ContactadminComponent(authService, flash, validate, router) {
         this.authService = authService;
         this.flash = flash;
         this.validate = validate;
+        this.router = router;
     }
     ContactadminComponent.prototype.ngOnInit = function () {
+        if (this.authService.loggedIn()) {
+            this.router.navigate(['/home']);
+        }
     };
     ContactadminComponent.prototype.onRequest = function () {
         var obj = {
@@ -693,7 +718,8 @@ var ContactadminComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"],
             angular2_flash_messages__WEBPACK_IMPORTED_MODULE_2__["FlashMessagesService"],
-            _services_validate_service__WEBPACK_IMPORTED_MODULE_3__["ValidateService"]])
+            _services_validate_service__WEBPACK_IMPORTED_MODULE_3__["ValidateService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], ContactadminComponent);
     return ContactadminComponent;
 }());
@@ -709,7 +735,7 @@ var ContactadminComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\n    max-width: 960px;\n}\n\n.border-top {\n    border-top: 1px solid #e5e5e5;\n}\n\n.border-bottom {\n    border-bottom: 1px solid #e5e5e5;\n}\n\n.border-top-gray {\n    border-top-color: #adb5bd;\n}\n\n/* hello */\n\n.box-shadow {\n    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);\n}\n\n.lh-condensed {\n    line-height: 1.25;\n}"
+module.exports = ".container {\n    max-width: 960px;\n}\n\n.border-top {\n    border-top: 1px solid #e5e5e5;\n}\n\n.border-bottom {\n    border-bottom: 1px solid #e5e5e5;\n}\n\n.border-top-gray {\n    border-top-color: #adb5bd;\n}\n\n/* hello */\n\n.box-shadow {\n    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);\n}\n\n.lh-condensed {\n    line-height: 1.25;\n}\n\n.qr\n{\n    padding: 5px;\n}"
 
 /***/ }),
 
@@ -739,6 +765,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! angular2-flash-messages */ "./node_modules/angular2-flash-messages/module/index.js");
 /* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angular2_flash_messages__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _services_validate_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/validate.service */ "./src/app/services/validate.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -752,13 +779,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var ContactusComponent = /** @class */ (function () {
-    function ContactusComponent(authService, flash, validate) {
+    function ContactusComponent(authService, flash, validate, router) {
         this.authService = authService;
         this.flash = flash;
         this.validate = validate;
+        this.router = router;
     }
     ContactusComponent.prototype.ngOnInit = function () {
+        if (this.authService.loggedIn()) {
+            this.router.navigate(['/home']);
+        }
     };
     ContactusComponent.prototype.onFeed = function () {
         var obj = {
@@ -810,7 +842,8 @@ var ContactusComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"],
             angular2_flash_messages__WEBPACK_IMPORTED_MODULE_2__["FlashMessagesService"],
-            _services_validate_service__WEBPACK_IMPORTED_MODULE_3__["ValidateService"]])
+            _services_validate_service__WEBPACK_IMPORTED_MODULE_3__["ValidateService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], ContactusComponent);
     return ContactusComponent;
 }());
@@ -1051,7 +1084,7 @@ var DashboardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".qr{\r\n    padding: 5px;\r\n}"
 
 /***/ }),
 
@@ -1077,6 +1110,8 @@ module.exports = "<div>\n  <h1 class=\"jumbotron-heading text-white text-center\
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventsComponent", function() { return EventsComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1087,10 +1122,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var EventsComponent = /** @class */ (function () {
-    function EventsComponent() {
+    function EventsComponent(authService, router) {
+        this.authService = authService;
+        this.router = router;
     }
     EventsComponent.prototype.ngOnInit = function () {
+        if (this.authService.loggedIn()) {
+            this.router.navigate(['/home']);
+        }
     };
     EventsComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1098,7 +1140,8 @@ var EventsComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./events.component.html */ "./src/app/components/events/events.component.html"),
             styles: [__webpack_require__(/*! ./events.component.css */ "./src/app/components/events/events.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], EventsComponent);
     return EventsComponent;
 }());
@@ -1229,6 +1272,9 @@ var ForgetComponent = /** @class */ (function () {
         this.router = router;
     }
     ForgetComponent.prototype.ngOnInit = function () {
+        if (this.authService.loggedIn()) {
+            this.router.navigate(['/home']);
+        }
     };
     ForgetComponent.prototype.onResetClick = function () {
         var _this = this;
@@ -1360,7 +1406,7 @@ var HeaderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".qr\r\n{\r\n    padding: 5px;\r\n}"
 
 /***/ }),
 
@@ -1476,6 +1522,9 @@ var LoginComponent = /** @class */ (function () {
         this.flashmessage = flashmessage;
     }
     LoginComponent.prototype.ngOnInit = function () {
+        if (this.authService.loggedIn()) {
+            this.router.navigate(['/home']);
+        }
     };
     LoginComponent.prototype.onLoginSubmit = function () {
         var _this = this;
@@ -2113,6 +2162,10 @@ var ResetpwdComponent = /** @class */ (function () {
             _this.token = params['token'];
             console.log(_this.token);
         });
+        if (this.token == "" || this.token == undefined || this.token == null) {
+            this.flashmessage.show("Invalid Route Access", { cssClass: 'alert-danger text-center', timeOut: 2000 });
+            this.router.navigate(['/home']);
+        }
     };
     ResetpwdComponent.prototype.onResetPwdSubmit = function () {
         var _this = this;

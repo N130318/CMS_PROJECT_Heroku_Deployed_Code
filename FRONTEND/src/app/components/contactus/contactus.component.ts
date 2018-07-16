@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ValidateService } from '../../services/validate.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contactus',
@@ -23,10 +24,14 @@ export class ContactusComponent implements OnInit {
   constructor(
     private authService:AuthService,
     private flash:FlashMessagesService,
-    private validate:ValidateService
+    private validate:ValidateService,
+    private router:Router
   ) { }
 
   ngOnInit() {
+    if (this.authService.loggedIn()) {
+      this.router.navigate(['/home']);
+   }
   }
 
   onFeed(){

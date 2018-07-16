@@ -25,6 +25,10 @@ export class ResetpwdComponent implements OnInit {
       this.token = params['token'];
       console.log(this.token);
     });
+    if(this.token==""||this.token==undefined||this.token==null){
+      this.flashmessage.show("Invalid Route Access",{cssClass:'alert-danger text-center',timeOut:2000});
+      this.router.navigate(['/home']);
+    }
   }
 
   onResetPwdSubmit(){

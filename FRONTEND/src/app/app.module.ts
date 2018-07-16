@@ -52,7 +52,7 @@ var appRoutes:Routes=[
     { path:"login", component:LoginComponent },
     { path:"dashboard", component:DashboardComponent, canActivate:[AuthGuard]},
     { path:"welcome", component:WelcomeComponent,canActivate:[AuthGuard]},
-    { path:"search", component:SearchComponent},
+    { path:"search", component:SearchComponent,canActivate:[AuthGuard,AdminGuard]},
     { path:"profile", component:ProfileComponent,canActivate:[AuthGuard]},
     { path:"add", component:AddComponent,canActivate:[AdminGuard]},
     { path:"forgot", component:ForgetComponent},
