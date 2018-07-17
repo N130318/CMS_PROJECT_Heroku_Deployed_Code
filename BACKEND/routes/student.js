@@ -330,56 +330,109 @@ router.put('/updateusers/:userid', function(req, res, next) {
                 if(err){
                   console.log(err);
                   res.json(err);}
-                else if(reslt.n==1){
-                //Confirmation to Student Email
-                const output = `
-            <p>Dear Student, This is a Confirmation that your Basic Details Updated</p>
-            <h3>Profile Details</h3>
-            <ul>  
-                <li>E-mail: ${newuser.email}</li>
-                <li>User Id: ${newuser.userid}</li>
-                <li>Role: ${newuser.role}</li>
-                <li>Department: ${newuser.dept}</li>
-            </ul>
-            <h3>Note:</h3>
-            <p>If you not requested this please write a request at <a href="https://cryptic-temple-72625.herokuapp.com/#/contactadmin">contact admin</a>, To again update it</p>
-            `;
-            
-            let  transporter = nodemailer.createTransport({
-                host:"smtp.gmail.com",
-                service: "Gmail",
-                secure: false,
-                port: 465,
-                auth: {
-                    type:"OAuth2",
-                    user: "cms.feedback9144@gmail.com", // Your gmail address.
-                    clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                    refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
-                },
-                tls:
+                else if(reslt.n==1)
                 {
-                    rejectUnauthorized:false
-                }
-              });
-        
-            // setup email data with unicode symbols
-            let mailOptions = {
-                from: '"college manager" <cms.feedback9144@gmail.com>', // sender address
-                to: reqrddata.email, // list of receivers
-                subject: 'Regarding CMS Basic Profile Update', // Subject line
-                html: output
-            };
-        
-            // send mail with defined transport object
-            transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    return console.log(error);
-                }
-                console.log("The message was sent!");
-                console.log(info);
+                  //Confirmation to Student Email
+                  if(reqrddata.email!=newuser.email){
+                  const output = `
+              <p>Dear Student, This is a Confirmation that your Basic Details Updated</p>
+              <h3>Profile Details</h3>
+              <ul>  
+                  <li>E-mail: ${newuser.email}</li>
+                  <li>User Id: ${newuser.userid}</li>
+                  <li>Role: ${newuser.role}</li>
+                  <li>Department: ${newuser.dept}</li>
+              </ul>
+              <h3>Note:</h3>
+              <p>If you not requested this please write a request at <a href="https://cryptic-temple-72625.herokuapp.com/#/contactadmin">contact admin</a>, To again update it</p>
+              `;
+              
+              let  transporter = nodemailer.createTransport({
+                  host:"smtp.gmail.com",
+                  service: "Gmail",
+                  secure: false,
+                  port: 465,
+                  auth: {
+                      type:"OAuth2",
+                      user: "cms.feedback9144@gmail.com", // Your gmail address.
+                      clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
+                      clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
+                      refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+                  },
+                  tls:
+                  {
+                      rejectUnauthorized:false
+                  }
                 });
-                const output2 = `
+          
+              // setup email data with unicode symbols
+              let mailOptions = {
+                  from: '"college manager" <cms.feedback9144@gmail.com>', // sender address
+                  to: reqrddata.email, // list of receivers
+                  subject: 'Regarding CMS Basic Profile Update', // Subject line
+                  html: output
+              };
+          
+              // send mail with defined transport object
+              transporter.sendMail(mailOptions, (error, info) => {
+                  if (error) {
+                      return console.log(error);
+                  }
+                  console.log("The message was sent!");
+                  console.log(info);
+                  });
+                  const output2 = `
+              <p>Dear Student, This is a Confirmation that your Basic Details Updated</p>
+              <h3>Profile Details</h3>
+              <ul>  
+                  <li>E-mail: ${newuser.email}</li>
+                  <li>User Id: ${newuser.userid}</li>
+                  <li>Role: ${newuser.role}</li>
+                  <li>Department: ${newuser.dept}</li>
+              </ul>
+              <h3>Note:</h3>
+              <p>If you forgot your password, <a href="https://cryptic-temple-72625.herokuapp.com/#/forgot">click here</a></p>
+              `;
+              
+              let  transporter2 = nodemailer.createTransport({
+                  host:"smtp.gmail.com",
+                  service: "Gmail",
+                  secure: false,
+                  port: 465,
+                  auth: {
+                      type:"OAuth2",
+                      user: "cms.feedback9144@gmail.com", // Your gmail address.
+                      clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
+                      clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
+                      refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+                  },
+                  tls:
+                  {
+                      rejectUnauthorized:false
+                  }
+                });
+          
+              // setup email data with unicode symbols
+              let mailOptions2 = {
+                  from: '"college manager" <cms.feedback9144@gmail.com>', // sender address
+                  to: newuser.email, // list of receivers
+                  subject: 'Regarding CMS Basic Profile Update', // Subject line
+                  html: output2
+              };
+          
+              // send mail with defined transport object
+              transporter2.sendMail(mailOptions2, (error, info) => {
+                  if (error) {
+                      return console.log(error);
+                  }
+                  console.log("The message was sent!");
+                  console.log(info);
+                  });
+                    res.json({success:true,msg:"Student Updated Succesfully"});
+                    console.log(reslt); 
+                  }
+                  else{
+                    const output2 = `
             <p>Dear Student, This is a Confirmation that your Basic Details Updated</p>
             <h3>Profile Details</h3>
             <ul>  
@@ -427,7 +480,8 @@ router.put('/updateusers/:userid', function(req, res, next) {
                 console.log(info);
                 });
                   res.json({success:true,msg:"Student Updated Succesfully"});
-                  console.log(reslt); 
+                  console.log(reslt);
+                  }
                 }
                 else{
                   console.log(reslt);
@@ -463,6 +517,7 @@ router.put('/updateusers/:userid', function(req, res, next) {
                   console.log(err);
                   res.json(err);}
                 else if(reslt.n==1){
+                  if(reqrddata.email!=newuser.email){
                   const output = `
                   <p>Dear HOD, This is a Confirmation that your Basic Details Updated</p>
                   <h3>Profile Details</h3>
@@ -559,6 +614,59 @@ router.put('/updateusers/:userid', function(req, res, next) {
                       });
                   res.json({success:true,msg:"HOD Updated Succesfully"});
                   console.log(reslt); 
+                  }
+                  else{
+                    const output2 = `
+                  <p>Dear HOD, This is a Confirmation that your Basic Details Updated</p>
+                  <h3>Profile Details</h3>
+                  <ul>  
+                      <li>E-mail: ${newuser.email}</li>
+                      <li>User Id: ${newuser.userid}</li>
+                      <li>Role: ${newuser.role}</li>
+                      <li>Department: ${newuser.dept}</li>
+                  </ul>
+                  <h3>Note:</h3>
+                  <p>If you forgot your password, <a href="https://cryptic-temple-72625.herokuapp.com/#/forgot">click here</a></p>
+                  `;
+                  
+                  let  transporter2 = nodemailer.createTransport({
+                      host:"smtp.gmail.com",
+                      service: "Gmail",
+                      secure: false,
+                      port: 465,
+                      auth: {
+                          type:"OAuth2",
+                          user: "cms.feedback9144@gmail.com", // Your gmail address.
+                          clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
+                          clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
+                          refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+                      },
+                      tls:
+                      {
+                          rejectUnauthorized:false
+                      }
+                    });
+              
+                  // setup email data with unicode symbols
+                  let mailOptions2 = {
+                      from: '"college manager" <cms.feedback9144@gmail.com>', // sender address
+                      to: newuser.email, // list of receivers
+                      subject: 'Regarding CMS Basic Profile Update', // Subject line
+                      html: output2
+                  };
+              
+                  // send mail with defined transport object
+                  transporter2.sendMail(mailOptions2, (error, info) => {
+                      if (error) {
+                          return console.log(error);
+                      }
+                      console.log("The message was sent!");
+                      console.log(info);
+                      });
+                  res.json({success:true,msg:"HOD Updated Succesfully"});
+                  console.log(reslt); 
+
+                  }
                 }
                 else{
                   console.log(reslt);
@@ -594,6 +702,7 @@ router.put('/updateusers/:userid', function(req, res, next) {
                   console.log(err);
                   res.json(err);}
                 else if(reslt.n==1){
+                  if(reqrddata.email!=newuser.email){
                   const output = `
                   <p>Dear Tpo, This is a Confirmation that your Basic Details Updated</p>
                   <h3>Profile Details</h3>
@@ -675,7 +784,7 @@ router.put('/updateusers/:userid', function(req, res, next) {
                       from: '"college manager" <cms.feedback9144@gmail.com>', // sender address
                       to: newuser.email, // list of receivers
                       subject: 'Regarding CMS Basic Profile Update', // Subject line
-                      html: output
+                      html: output2
                   };
               
                   // send mail with defined transport object
@@ -688,6 +797,58 @@ router.put('/updateusers/:userid', function(req, res, next) {
                       });
                   res.json({success:true,msg:"TPO Updated Succesfully"});
                   console.log(reslt); 
+                    }
+                  else{
+                    const output2 = `
+                    <p>Dear Tpo, This is a Confirmation that your Basic Details Updated</p>
+                    <h3>Profile Details</h3>
+                    <ul>  
+                        <li>E-mail: ${newuser.email}</li>
+                        <li>User Id: ${newuser.userid}</li>
+                        <li>Role: ${newuser.role}</li>
+                    </ul>
+                    <h3>Note:</h3>
+                    <p>If you forgot your password, <a href="https://cryptic-temple-72625.herokuapp.com/#/forgot">click here</a></p>
+                    `;
+                    
+                    let  transporter2 = nodemailer.createTransport({
+                        host:"smtp.gmail.com",
+                        service: "Gmail",
+                        secure: false,
+                        port: 465,
+                        auth: {
+                            type:"OAuth2",
+                            user: "cms.feedback9144@gmail.com", // Your gmail address.
+                            clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
+                            clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
+                            refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+                        },
+                        tls:
+                        {
+                            rejectUnauthorized:false
+                        }
+                      });
+                
+                    // setup email data with unicode symbols
+                    let mailOptions2 = {
+                        from: '"college manager" <cms.feedback9144@gmail.com>', // sender address
+                        to: newuser.email, // list of receivers
+                        subject: 'Regarding CMS Basic Profile Update', // Subject line
+                        html: output2
+                    };
+                
+                    // send mail with defined transport object
+                    transporter2.sendMail(mailOptions2, (error, info) => {
+                        if (error) {
+                            return console.log(error);
+                        }
+                        console.log("The message was sent!");
+                        console.log(info);
+                        });
+                    res.json({success:true,msg:"TPO Updated Succesfully"});
+                    console.log(reslt);
+
+                  }
                 }
                 else{
                   console.log(reslt);

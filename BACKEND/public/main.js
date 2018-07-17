@@ -177,7 +177,7 @@ var appRoutes = [
     { path: "login", component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_20__["LoginComponent"] },
     { path: "dashboard", component: _components_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_21__["DashboardComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]] },
     { path: "welcome", component: _components_welcome_welcome_component__WEBPACK_IMPORTED_MODULE_23__["WelcomeComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]] },
-    { path: "search", component: _components_search_search_component__WEBPACK_IMPORTED_MODULE_25__["SearchComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"], _guards_admin_guard__WEBPACK_IMPORTED_MODULE_12__["AdminGuard"]] },
+    { path: "search", component: _components_search_search_component__WEBPACK_IMPORTED_MODULE_25__["SearchComponent"] },
     { path: "profile", component: _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_22__["ProfileComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]] },
     { path: "add", component: _components_add_add_component__WEBPACK_IMPORTED_MODULE_24__["AddComponent"], canActivate: [_guards_admin_guard__WEBPACK_IMPORTED_MODULE_12__["AdminGuard"]] },
     { path: "forgot", component: _components_forget_forget_component__WEBPACK_IMPORTED_MODULE_26__["ForgetComponent"] },
@@ -1640,10 +1640,13 @@ var ManageusersComponent = /** @class */ (function () {
             this.getUsers(this.type);
             localStorage.removeItem('type');
         }
-        this.authService.userTypesObservable$.subscribe(function (type) {
+        this.dispose = this.authService.userTypesObservable$.subscribe(function (type) {
             _this.getUsers(type);
             _this.type = type;
         });
+    };
+    ManageusersComponent.prototype.ngOnDestroy = function () {
+        this.dispose.unsubscribe();
     };
     ManageusersComponent.prototype.hodcomp = function () {
         if (this.type == "hod") {
@@ -2269,6 +2272,9 @@ var SearchComponent = /** @class */ (function () {
         this.tpotable = false;
     }
     SearchComponent.prototype.ngOnInit = function () {
+        if (!this.authService.loggedIn()) {
+            this.router.navigate(['/login']);
+        }
         this.students = [];
         this.tpodepts = [];
         this.tpoyears = [];

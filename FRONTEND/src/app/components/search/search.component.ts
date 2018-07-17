@@ -28,6 +28,9 @@ export class SearchComponent implements OnInit {
 ) { }
 
   ngOnInit() {
+    if (!this.authService.loggedIn()) {
+      this.router.navigate(['/login']);
+   }
     this.students=[];
     this.tpodepts=[];
     this.tpoyears=[];

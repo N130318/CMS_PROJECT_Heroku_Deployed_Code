@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
 import {HeaderComponent} from '../header/header.component';
+import { OnDestroy } from '@angular/core';
 
 
 @Component({
@@ -12,10 +13,11 @@ import {HeaderComponent} from '../header/header.component';
   templateUrl: './manageusers.component.html',
   styleUrls: ['./manageusers.component.css']
 })
-export class ManageusersComponent implements OnInit {
+export class ManageusersComponent implements OnInit,OnDestroy {
   users: any = [];
   type:String;
   usertype:String="USERS";
+  dispose;
   constructor(private authService:AuthService,
     private flashmessage:FlashMessagesService,
     private router:Router) {
@@ -27,12 +29,15 @@ export class ManageusersComponent implements OnInit {
       this.getUsers(this.type);
       localStorage.removeItem('type');
     }
-    this.authService.userTypesObservable$.subscribe(
+    this.dispose=this.authService.userTypesObservable$.subscribe(
       (type: String) => {
          this.getUsers(type);
          this.type=type;
       }
     )
+  }
+  ngOnDestroy(){
+    this.dispose.unsubscribe()
   }
   hodcomp(){
     if(this.type=="hod"){
