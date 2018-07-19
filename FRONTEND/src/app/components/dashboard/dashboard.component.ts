@@ -5,7 +5,6 @@ import { AuthService } from '../../services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { __core_private_testing_placeholder__ } from '@angular/core/testing';
 import { Posts } from '../../models/posts';
 
 @Component({

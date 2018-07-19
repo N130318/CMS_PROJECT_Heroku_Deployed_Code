@@ -28,9 +28,10 @@ export class SearchComponent implements OnInit {
 ) { }
 
   ngOnInit() {
-    if (!this.authService.loggedIn()) {
-      this.router.navigate(['/login']);
-   }
+    if (this.authService.studentLoggedIn()) {
+      this.router.navigate(['/home']);
+      this.flashmessage.show("Invalid Route Access",{cssClass:'alert-danger text-center',timeOut:2000});
+    }
     this.students=[];
     this.tpodepts=[];
     this.tpoyears=[];

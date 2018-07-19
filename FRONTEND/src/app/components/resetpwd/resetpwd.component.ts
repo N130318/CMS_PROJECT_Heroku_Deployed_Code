@@ -54,5 +54,4 @@ export class ResetpwdComponent implements OnInit {
       });
     }
   }
-
 }

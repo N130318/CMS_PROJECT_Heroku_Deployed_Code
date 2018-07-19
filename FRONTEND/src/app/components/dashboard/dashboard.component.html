@@ -24,7 +24,7 @@
                             <option value="all">All</option>
                             <option value="1year">1<sup>st </sup>year</option>
                             <option value="2year">2<sup>nd </sup>year</option>
-                            <option value="3year">3<sup>rd </sup>year</option>
+                            <option value="3year">3<sup>ssssssrd </sup>year</option>
                             <option value="4year">4<sup>th </sup>year</option>
                           </select>
                     </div>
@@ -152,20 +152,14 @@
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
+                  <h4 class="modal-title" *ngIf="user.dept!=''&&user.dept!=undefined&&user.year!=''&&user.year!=undefined">Time Table Of {{user.year}} {{user.dept}}</h4>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <!-- <h4 class="modal-title">Modal Header</h4>-->
                 </div>
-            <div class="modal-body ">
-              <table border="" >
-          <tr><th>PERIOD</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
-          <tr><th>DAY</th><td>9:00-10:00</td><td>10:00-11:00</td><td>11:00-12:00</td><td>12:00-1:00</td><td>1:00-2:00</td><td>2:00-3:00</td><td>3:00-4:00</td></tr>
-          <tr><th>MON</th><td>CN</td><td>DAA</td><td>IPR</td><td rowspan="6" valign="middle">LUNCH BREAK</td><td>SE</td><td>WT</td><td>DWDM</td></tr>
-          <tr><th>TUE</th><td>IPR</td><td>DWDM</td><td>DAA</td><td colspan="3">-----WT-----</td></tr>
-          <tr><th>WED</th><td>SE </td><td>DWDM</td><td>CN</td><td>WT</td><td>IPR</td><td>DAA</td></tr>
-          <tr><th>THU</th><td colspan="3">---WT---</td><td>CN</td><td>WT</td><td>SE</td></tr>
-          <tr><th>FRI</th><td>WT</td><td>CN</td><td>DWDM</td><td>SE</td><td>DAA</td><td>IPR</td></tr>
-          <tr><th>SAT</th><td>Seminar</td><td>seminar</td><td>LIBRARY</td><td colspan="3">---SPORTS---</td></tr>
-        </table>
+            <div class="modal-body" *ngIf="user.dept!=''&&user.dept!=undefined&&user.year!=''&&user.year!=undefined">
+              <img src="assets/images/{{user.year}}_{{user.dept}}.png" style="width:100%;height:100%;">
+            </div>
+            <div class="modal-body" *ngIf="user.dept==''||user.dept==undefined||user.year==''||user.year==undefined">
+              <img src="assets/images/default_tt.png" style="width:100%;height:100%;">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
