@@ -550,9 +550,9 @@ router.put('/updateuser/:userid',multer({dest:"./public/uploads/"}).single('imag
           if(err) throw err;
           else
           {
-            if(reqrddata.image=="abc"||!fs.existsSync('./public/uploads/'+reqrddata.image))
+            if(reqrddata.image=="abc"||(!fs.existsSync('./public/uploads/'+reqrddata.image)&&req.body.pic!="true")||(fs.existsSync('./public/uploads/'+reqrddata.image)&&req.body.pic!="true")||(!fs.existsSync('./public/uploads/'+reqrddata.image)&&req.body.pic=="true"))
             {
-              console.log("Profile Pic Unavailable");
+              console.log("Profile Pic Unavailable Or Not Selected");
               var stu={
                 name:req.body.name,
                 dob:req.body.dob,
@@ -632,9 +632,9 @@ router.put('/updateuser/:userid',multer({dest:"./public/uploads/"}).single('imag
           if(err) throw err;
           else
           {
-            if(reqrddata.image=="abc"||!fs.existsSync('./public/uploads/'+reqrddata.image))
+            if(reqrddata.image=="abc"||(!fs.existsSync('./public/uploads/'+reqrddata.image)&&req.body.pic!="true")||(fs.existsSync('./public/uploads/'+reqrddata.image)&&req.body.pic!="true")||(!fs.existsSync('./public/uploads/'+reqrddata.image)&&req.body.pic=="true"))
             {
-              console.log("Profile Pic Unavailable");
+              console.log("Profile Pic Unavailable Or Not Selected");
               var hod={
                 name:req.body.name,
                 qualification:req.body.qualification,
@@ -702,9 +702,9 @@ router.put('/updateuser/:userid',multer({dest:"./public/uploads/"}).single('imag
           if(err) throw err;
           else
           {
-            if(reqrddata.image=="abc"||!fs.existsSync('./public/uploads/'+reqrddata.image))
+            if(reqrddata.image=="abc"||(!fs.existsSync('./public/uploads/'+reqrddata.image)&&req.body.pic!="true")||(fs.existsSync('./public/uploads/'+reqrddata.image)&&req.body.pic!="true")||(!fs.existsSync('./public/uploads/'+reqrddata.image)&&req.body.pic=="true"))
             {
-              console.log("Profile Pic Unavailable");
+              console.log("Profile Pic Unavailable Or Not Selected");
               var tpo={
                 name:req.body.name,
                 qualification:req.body.qualification,
@@ -729,6 +729,7 @@ router.put('/updateuser/:userid',multer({dest:"./public/uploads/"}).single('imag
                   }
                 });
             }
+            
             else
             {
                 try {
@@ -970,7 +971,7 @@ router.post('/changepassword', function(req, res, next) {
                 });
               });
               }
-              else{
+              else{     //Admin Password Changed response
                 res.json({success:true,msg:"Password Updated Succesfully."});
               }
             }
