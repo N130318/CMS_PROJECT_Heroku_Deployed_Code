@@ -9,7 +9,7 @@
               <h3>Please fill in your details</h3>
           </font>
           <form (submit)="onRequest()" ngNativeValidate>
-          <div class="needs-validation">
+          <div class="needs-validation" style="margin-bottom:10px;">
                   <div class="col-md-6 mb-3 ">
                       <label for="email or uid"><font color="white">Email / UserId</font></label>
                       <input type="text" class="form-control " name="emailoruid" placeholder="Enter your E-mail or Userid" [(ngModel)]="emailoruid" required (keypress)="keyPressText($event)">

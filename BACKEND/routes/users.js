@@ -801,192 +801,199 @@ router.post('/changepassword', function(req, res, next) {
         if(err) throw err;
         if(ismatch)
         {
-          User.findOneAndUpdate({userid:userid},{$set:{password:newpassword}},function(err,result){
-            if(err){
-              res.json(err);
+          User.compareUserPassword(oldpassword,newpassword,function(err,ismatched){
+          if(err) throw err;
+          if(ismatched){
+            return res.json({success:false,msg:"Current Password and New Password should not to be Same."});
+          }
+          else{
+              User.findOneAndUpdate({userid:userid},{$set:{password:newpassword}},function(err,result){
+                if(err){
+                  res.json(err);
+                }
+                else{
+                  if(userrole=="student")
+                  {
+                        Student.getStudentByUserId(userid,function(err,usersdata){
+                          if(err) throw err;
+                          if(!usersdata)
+                          {
+                            return res.json({success:false,msg:"Student not found."});
+                          }
+                        const output = `
+                        <p>Dear ${upperCase(usersdata.role)},</p>
+                        <p>Your password for CMS account with userid :` + user.userid + ` has just been changed Successfully.</p><br>
+                        <h3>Note</h3>
+                        <p>If you Not did this please click on <a href="https://cryptic-temple-72625.herokuapp.com/#/forgot">forgot password</a> to change your Password Immidiately,Kindly Cooperate with us.</p>
+                        `;
+                    
+                        let  transporter = nodemailer.createTransport({
+                          host:"smtp.gmail.com",
+                          service: "Gmail",
+                          secure: false,
+                          port: 465,
+                          auth: {
+                            type:"OAuth2",
+                            user: "cms.feedback9144@gmail.com", // Your gmail address.
+                            clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
+                            clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
+                            refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+                            },
+                          tls:
+                          {
+                                rejectUnauthorized:false
+                            }
+                          });
+                    
+                        // setup email data with unicode symbols
+                        let mailOptions = {
+                            from: '"college manager" <cms.feedback9144@gmail.com>', // sender address
+                            to: usersdata.email,
+                            subject: 'Regarding CMS Account Password Changed' , // Subject line
+                            text: 'Hello world?', // plain text body
+                            html: output, // html body
+                            replyTo:'cms.feedback9144@gmail.com'
+                        };
+                    
+                        // send mail with defined transport object
+                        transporter.sendMail(mailOptions, (error, info) => {
+                            if (error) {
+                                return console.log(error);
+                            }
+                            console.log("The message was sent!");
+                            console.log(info);
+                            res.json({success:true,msg:"Password Updated Succesfully."});
+                            });
+                          });
+                  }
+                  else if(userrole=="hod")
+                  {
+                    HOD.getHodByUserId(userid,function(err,usersdata){
+                      if(err) throw err;
+                      if(!usersdata)
+                      {
+                        return res.json({success:false,msg:"HOD not found."});
+                      }
+                    console.log(usersdata);
+                    //Send Password Change E-Mail
+                    const output = `
+                    <p>Dear ${upperCase(usersdata.role)},</p>
+                    <p>Your password for CMS account with userid :` + user.userid + ` has just been changed Successfully.</p><br>
+                    <h3>Note</h3>
+                    <p>If you Not did this please click on <a href="https://cryptic-temple-72625.herokuapp.com/#/forgot">forgot password</a> to change your Password Immidiately,Kindly Cooperate with us.</p>
+                    `;
+                
+                let  transporter = nodemailer.createTransport({
+                  host:"smtp.gmail.com",
+                  service: "Gmail",
+                  secure: false,
+                  port: 465,
+                  auth: {
+                    type:"OAuth2",
+                    user: "cms.feedback9144@gmail.com", // Your gmail address.
+                    clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
+                    clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
+                    refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+                    },
+                  tls:
+                  {
+                        rejectUnauthorized:false
+                    }
+                  });
+            
+                // setup email data with unicode symbols
+                let mailOptions = {
+                    from: '"college manager" <cms.feedback9144@gmail.com>', // sender address
+                    to: usersdata.email,
+                    subject: 'Regarding CMS Account Password Changed' , // Subject line
+                    text: 'Hello world?', // plain text body
+                    html: output, // html body
+                    replyTo:'cms.feedback9144@gmail.com'
+                };
+            
+                // send mail with defined transport object
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        return console.log(error);
+                    }
+                    console.log("The message was sent!");
+                    console.log(info);
+                    res.json({success:true,msg:"Password Updated Succesfully."});
+                    });
+                  });
+                  }
+                  else if(userrole=="tpo")
+                  {
+                    TPO.getTpoByUserId(userid,function(err,usersdata){
+                      if(err) throw err;
+                      if(!usersdata)
+                      {
+                        return res.json({success:false,msg:"TPO not found."});
+                      }
+                    //Send Password Change E-Mail
+                    const output = `
+                    <p>Dear ${upperCase(usersdata.role)},</p>
+                    <p>Your password for CMS account with userid :` + user.userid + ` has just been changed Successfully.</p><br>
+                    <h3>Note</h3>
+                    <p>If you Not did this please click on <a href="https://cryptic-temple-72625.herokuapp.com/#/forgot">forgot password</a> to change your Password Immidiately,Kindly Cooperate with us.</p>
+                    `;
+                
+                let  transporter = nodemailer.createTransport({
+                  host:"smtp.gmail.com",
+                  service: "Gmail",
+                  secure: false,
+                  port: 465,
+                  auth: {
+                    type:"OAuth2",
+                    user: "cms.feedback9144@gmail.com", // Your gmail address.
+                    clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
+                    clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
+                    refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+                    },
+                  tls:
+                  {
+                        rejectUnauthorized:false
+                    }
+                  });
+            
+                // setup email data with unicode symbols
+                let mailOptions = {
+                    from: '"college manager" <cms.feedback9144@gmail.com>', // sender address
+                    to: usersdata.email,
+                    subject: 'Regarding CMS Account Password Changed' , // Subject line
+                    text: 'Hello world?', // plain text body
+                    html: output, // html body
+                    replyTo:'cms.feedback9144@gmail.com'
+                };
+            
+                // send mail with defined transport object
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        return console.log(error);
+                    }
+                    console.log("The message was sent!");
+                    console.log(info);
+                    res.json({success:true,msg:"Password Updated Succesfully."});
+                    });
+                  });
             }
-            else{
-              if(userrole=="student")
-              {
-                Student.getStudentByUserId(userid,function(err,usersdata){
-                  if(err) throw err;
-                  if(!usersdata)
-                  {
-                    return res.json({success:false,msg:"Student not found."});
-                  }
-                const output = `
-                <p>Dear ${upperCase(usersdata.role)},</p>
-                <p>Your password for CMS Account has been succesfully changed.</p><br><br>
-                <h3>Note</h3>
-                <p>If you Not did this please click on <a href="https://cryptic-temple-72625.herokuapp.com/#/forgot">forgot password</a> to change your Immidiately,Kindly Cooperate with us.</p>
-                `;
-            
-            let  transporter = nodemailer.createTransport({
-              host:"smtp.gmail.com",
-              service: "Gmail",
-              secure: false,
-              port: 465,
-              auth: {
-                type:"OAuth2",
-                user: "cms.feedback9144@gmail.com", // Your gmail address.
-                clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
-                },
-              tls:
-              {
-                    rejectUnauthorized:false
-                }
-              });
-        
-            // setup email data with unicode symbols
-            let mailOptions = {
-                from: '"college manager" <cms.feedback9144@gmail.com>', // sender address
-                to: usersdata.email,
-                subject: 'Regarding CMS Account Password Changed' , // Subject line
-                text: 'Hello world?', // plain text body
-                html: output, // html body
-                replyTo:'cms.feedback9144@gmail.com'
-            };
-        
-            // send mail with defined transport object
-            transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    return console.log(error);
-                }
-                console.log("The message was sent!");
-                console.log(info);
-                res.json({success:true,msg:"Password Updated Succesfully."});
-                });
-              });
-              }
-              else if(userrole=="hod")
-              {
-                HOD.getHodByUserId(userid,function(err,usersdata){
-                  if(err) throw err;
-                  if(!usersdata)
-                  {
-                    return res.json({success:false,msg:"HOD not found."});
-                  }
-                console.log(usersdata);
-                //Send Password Change E-Mail
-                const output = `
-                <p>Dear ${upperCase(usersdata.role)},</p>
-                <p>Your password for CMS Account has been succesfully changed.</p><br><br>
-                <h3>Note</h3>
-                <p>If you Not did this please click on <a href="https://cryptic-temple-72625.herokuapp.com/#/forgot">forgot password</a> to change your Immidiately,Kindly Cooperate with us.</p>
-                `;
-            
-            let  transporter = nodemailer.createTransport({
-              host:"smtp.gmail.com",
-              service: "Gmail",
-              secure: false,
-              port: 465,
-              auth: {
-                type:"OAuth2",
-                user: "cms.feedback9144@gmail.com", // Your gmail address.
-                clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
-                },
-              tls:
-              {
-                    rejectUnauthorized:false
-                }
-              });
-        
-            // setup email data with unicode symbols
-            let mailOptions = {
-                from: '"college manager" <cms.feedback9144@gmail.com>', // sender address
-                to: usersdata.email,
-                subject: 'Regarding CMS Account Password Changed' , // Subject line
-                text: 'Hello world?', // plain text body
-                html: output, // html body
-                replyTo:'cms.feedback9144@gmail.com'
-            };
-        
-            // send mail with defined transport object
-            transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    return console.log(error);
-                }
-                console.log("The message was sent!");
-                console.log(info);
-                res.json({success:true,msg:"Password Updated Succesfully."});
-                });
-              });
-              }
-              else if(userrole=="tpo")
-              {
-                TPO.getTpoByUserId(userid,function(err,usersdata){
-                  if(err) throw err;
-                  if(!usersdata)
-                  {
-                    return res.json({success:false,msg:"TPO not found."});
-                  }
-                //Send Password Change E-Mail
-                const output = `
-                <p>Dear ${upperCase(usersdata.role)},</p>
-                <p>Your password for CMS Account has been succesfully changed.</p><br><br>
-                <h3>Note</h3>
-                <p>If you Not did this please click on <a href="https://cryptic-temple-72625.herokuapp.com/#/forgot">forgot password</a> to change your Immidiately,Kindly Cooperate with us.</p>
-                `;
-            
-            let  transporter = nodemailer.createTransport({
-              host:"smtp.gmail.com",
-              service: "Gmail",
-              secure: false,
-              port: 465,
-              auth: {
-                type:"OAuth2",
-                user: "cms.feedback9144@gmail.com", // Your gmail address.
-                clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
-                },
-              tls:
-              {
-                    rejectUnauthorized:false
-                }
-              });
-        
-            // setup email data with unicode symbols
-            let mailOptions = {
-                from: '"college manager" <cms.feedback9144@gmail.com>', // sender address
-                to: usersdata.email,
-                subject: 'Regarding CMS Account Password Changed' , // Subject line
-                text: 'Hello world?', // plain text body
-                html: output, // html body
-                replyTo:'cms.feedback9144@gmail.com'
-            };
-        
-            // send mail with defined transport object
-            transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    return console.log(error);
-                }
-                console.log("The message was sent!");
-                console.log(info);
-                res.json({success:true,msg:"Password Updated Succesfully."});
-                });
-              });
-              }
-              else{     //Admin Password Changed response
+            else{     //Admin Password Changed response
                 res.json({success:true,msg:"Password Updated Succesfully."});
               }
-            }
-          });
+          }
+        });
+        }
+        });
         }
         else{
           return res.json({success:false,msg:"password update failed,Invalid Old Password."});
         }
       });
-    });
+  });
   }
   else{
     res.json({success:false,msg:"Confirm Password and New Password Need to be Matched"});
   }
 });
-
 
 module.exports = router;

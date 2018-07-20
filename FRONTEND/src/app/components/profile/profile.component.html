@@ -1,5 +1,5 @@
 <!-- HOD PROFILE -->
-<div class="body" *ngIf="authService.hodLoggedIn() && authService.isProfileFilled() && !checkProfileUpdateCall()">
+<div class="body1" *ngIf="authService.hodLoggedIn() && authService.isProfileFilled() && !checkProfileUpdateCall()">
   <div class="container">
     <div class="row">
       <div class="offset-lg-4 col-lg-4 col-sm-6 col-12 main-section text-center">
@@ -19,7 +19,7 @@
                   
               </div>
           </div>
-          <div class="btn btn-info form-control" (click)="profileUpdateCall()">
+          <div class="btn btn-info form-control" style="margin-bottom:5px;" (click)="profileUpdateCall()">
                 <div class="col-lg-12 col-sm-12 col-12">
                     <i>Update</i>
                 </div> 
@@ -31,7 +31,7 @@
 
 <!-- Student Profile-->
 
-<div class="body" *ngIf="authService.studentLoggedIn() && authService.isProfileFilled() && !checkProfileUpdateCall()">
+<div class="body2" *ngIf="authService.studentLoggedIn() && authService.isProfileFilled() && !checkProfileUpdateCall()">
     <div class="container">
         <div class="row">
             <div class="offset-lg-4 col-lg-4 col-sm-6 col-12 main-section text-center">
@@ -52,7 +52,7 @@
                         <p><i class="fa fa-map-marker" aria-hidden="true">address : </i>{{address}}</p>
                     </div>
                 </div>
-                <div class="btn btn-info form-control" (click)="profileUpdateCall()">
+                <div class="btn btn-info form-control" style="margin-bottom:5px;" (click)="profileUpdateCall()">
                         <div class="col-lg-12 col-sm-12 col-12">
                             <i>Update</i>
                         </div> 
@@ -64,7 +64,7 @@
 
 <!-- Tpo profile-->
 
-<div class="body" *ngIf="authService.tpoLoggedIn() && authService.isProfileFilled() && !checkProfileUpdateCall()">
+<div class="body3" *ngIf="authService.tpoLoggedIn() && authService.isProfileFilled() && !checkProfileUpdateCall()">
   <div class="body" align="center">
     <div class="container">
       <div class="row">
@@ -88,7 +88,7 @@
                     
                 </div>
             </div>
-            <div class="btn btn-info form-control" (click)="profileUpdateCall()">
+            <div class="btn btn-info form-control" style="margin-bottom:5px;" (click)="profileUpdateCall()">
                 <div class="col-lg-12 col-sm-12 col-12">
                     <i>Update</i>
                 </div> 

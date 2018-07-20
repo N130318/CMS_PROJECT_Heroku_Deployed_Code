@@ -1,8 +1,13 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-.body{
-    padding-top:70px;
-
+.body1{
+  padding-top:90px;
+}
+.body2{
+    padding-top:55px;
+  }
+  .body3{
+    padding-top:90px;
   }
   .main-section{
   border:1px solid #138496;

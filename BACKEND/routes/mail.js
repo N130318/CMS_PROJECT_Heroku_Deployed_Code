@@ -10,6 +10,7 @@ const HOD = require('../models/hodmodel');
 const TPO = require('../models/tpomodel');
 var xoauth2 = require('xoauth2');
 var store=require("store");
+var upperCase = require('upper-case');
 const accountSid = 'AC185b0e6905c3b98ed0f49dbc1aedbda5';
 const authToken = 'a0205c20c7ab323e31d0bb286c228047';
 const client = require('twilio')(accountSid, authToken);
@@ -518,6 +519,8 @@ router.post('/send_user_req', (req, res) => {
 
 router.post('/forgot', function(req, res, next) {
     var usermail;
+    var usrrole;
+    var usrid;
     async.waterfall([
         function(done) {
             crypto.randomBytes(20, function(err, buf) {
@@ -535,6 +538,8 @@ router.post('/forgot', function(req, res, next) {
                     if(err) return next(err);
                     //console.log(user);
                     usermail = userdata.email;
+                    usrrole=userdata.role;
+                    usrid=userdata.userid;
                 });
             }
             else if(user.role=='hod'){
@@ -542,6 +547,8 @@ router.post('/forgot', function(req, res, next) {
                     if(err) return next(err);
                     //done(err, token, user);
                     usermail = userdata.email;
+                    usrrole=userdata.role;
+                    usrid=userdata.userid;
                 });
             }
             else if(user.role=='tpo'){
@@ -549,6 +556,8 @@ router.post('/forgot', function(req, res, next) {
                     if(err) return next(err);
                     //done(err, token, user);
                     usermail = userdata.email;
+                    usrrole=userdata.role;
+                    usrid=userdata.userid;
                 });
             }
             else{
@@ -581,14 +590,23 @@ router.post('/forgot', function(req, res, next) {
                     rejectUnauthorized:false
                 }
               });
+            const output_text = `
+              <p>Dear ${upperCase(usrrole)},</p>
+              <p>You are receiving this e-mail because you (or someone else) have requested to </p>
+              <p>Reset the password for your CMS account with user id: ${usrid}</p>
+              <p>Please click on the following link, or paste this into your browser to complete the reset password process:</p>
+              <p><a href="https://${req.headers.host}/mail/reset/${token}">https://${req.headers.host}/mail/reset/${token}</a></p>
+              <br>
+              <h3>Note</h3>
+              <p>The Link will be Expires After <b>One Hour</b>, Please Complete The Process Before One hour.</p>
+              <p>In case The link is Expired, Please Click <a href="https://cryptic-temple-72625.herokuapp.com/#/forgot">forgot password</a> to go and get new link.</p>
+              <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>
+              `;
         var mailOptions = {
             to: usermail,
             from: 'cms.feedback9144@gmail.com',
             subject: 'Password Reset',
-            text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-            'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-            'http://'+ req.headers.host + '/mail/reset/' + token + '\n\n' +
-            'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+            html: output_text
         };
         smtpTransport.sendMail(mailOptions, function(err) {
             if(!err)
