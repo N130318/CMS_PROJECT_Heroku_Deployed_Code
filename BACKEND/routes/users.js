@@ -15,6 +15,7 @@ var randomstring = require("randomstring");
 var upperCase = require('upper-case');
 var crypto=require('crypto');
 var fs=require('fs');
+var qs = require('querystring');
 var mime=require('mime');
 var path=require('path');
 var DIR = './public/uploads/';
@@ -528,7 +529,7 @@ router.get('/getalltpos', function(req, res, next) {
 });
 
 //Update Students Add Remaining fields storing also
-router.put('/updateuser/:userid',multer({dest:"./public/uploads/"}).single('image'), function(req, res, next) {
+router.put('/updateuser/:'+qs.unescape('userid'),multer({dest:"./public/uploads/"}).single('image'), function(req, res, next) {
   var uid=req.params.userid;
   User.getUserByUserId(req.params.userid,function(err,user){
     //console.log(user);
