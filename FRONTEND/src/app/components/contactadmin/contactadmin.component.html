@@ -9,7 +9,7 @@
                 <h3 style="margin-left:18px;">Please fill in your details</h3>
             </font>
             <form (submit)="onRequest()" ngNativeValidate>
-            <div class="needs-validation">
+            <div class="needs-validation" style="margin-bottom:10px;">
                     <div class="col-md-6 mb-3 ">
                         <label for="email or uid"><font color="white">Email / UserId</font></label>
                         <input type="text" class="form-control " name="emailoruid" placeholder="Enter your E-mail or Userid" [(ngModel)]="emailoruid" required (keypress)="keyPressText($event)">
@@ -39,13 +39,15 @@
                         <textarea rows="4" cols="50" name="message" required="required" [(ngModel)]="message" class="form-control" placeholder="Enter your Request Description" (keypress)="keyPressText($event)"> </textarea>
                     </div>
                     <div class="col-md-6 mb-3">
-                    <input type="submit" class="btn btn-primary btn-lg btn-block w-150" value="Submit Request">
+                        <input type="submit" class="btn btn-primary btn-lg btn-block w-100" value="Send Request">  
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="reset" class="btn btn-primary btn-lg btn-block w-60" value="Clear">
                     </div>
                     </div>
                     </form>
                     <div id="floating-button">
                             <img class="qr" src="/assets/qr.png">
-                        </div>
                     </div>
                 </div>
-  
+            </div>

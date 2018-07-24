@@ -200,6 +200,4 @@ export class ProfileComponent implements OnInit {
     else
       return false;
   }
-
 }
-

@@ -28,6 +28,7 @@ export class ContactadminComponent implements OnInit {
     if (this.authService.loggedIn()) {
       this.router.navigate(['/home']);
    }
+   this.flash.show('If you have any Technical Issue you use Contact-Admin You can Post it from here, If you want to send feedback/Educational Query use Contact-us, Some one will assist you Soon',{cssClass:'alert-info text-center',closeOnClick: true,showCloseBtn: true,timeout:5000});
   }
 
   onRequest(){
@@ -47,20 +48,20 @@ export class ContactadminComponent implements OnInit {
         {
           //this.flash.show(res.msg,{cssClass:'alert-success text-center',timeOut:2000});
           alert(res.msg);
+          this.message="";
+          this.subject="";
+          this.emailoruid="";
+          this.role="";
         }
         else{
           //this.flash.show("Something went wrong.",{cssClass:'alert-alert text-center',timeOut:2000});
           alert(res.msg);
         }
       });
-      this.message="";
-      this.subject="";
-      this.emailoruid="";
-      this.role="";
     }
   }
   keyPressText(event: any) {
-    const pattern = /[a-zA-Z0-9 \-\'\_\@\.]/;
+    const pattern = /[a-zA-Z0-9 \-\'\_\@\.\,\"]/;
 
     let inputChar = String.fromCharCode(event.charCode);
     if (event.keyCode != 8 && !pattern.test(inputChar)) {

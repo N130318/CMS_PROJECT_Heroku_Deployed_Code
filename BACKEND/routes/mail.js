@@ -72,8 +72,7 @@ router.post('/feedback_send', (req, res) => {
     let mailOptions = {
         from: '"college manager" <cms.feedback9144@gmail.com>', // sender address
         to: 'n130318@rguktn.ac.in', // list of receivers
-        subject: 'Node Contact Request', // Subject line
-        text: 'Hello world?', // plain text body
+        subject: 'CMS New User Educational Request / Feedback', // Subject line
         html: output // html body
     };
   
@@ -96,7 +95,7 @@ router.post('/send_user_req', (req, res) => {
     if(userrole=='student')
     {
         Student.findOne({ $or: [ { email: useremailoruid }, {userid:useremailoruid } ] },function(err,user){
-            console.log(useremail);
+            //console.log(useremail);
             console.log(user);
             if(err)
             {
@@ -105,7 +104,7 @@ router.post('/send_user_req', (req, res) => {
             }
             else if(user==[]||user==""||user==undefined)
             {
-                res.json({sucess:false,msg:"Please Provide Valid Email Id and Role"})
+                res.json({sucess:false,msg:"No User Existed with Given User Id and Role combination. Please Provide Valid Details"})
             }
             else
             {
@@ -246,7 +245,7 @@ router.post('/send_user_req', (req, res) => {
             }
             else if(!user)
             {
-                res.json({sucess:false,msg:"Please Provide Valid Email Id and Role"})
+                res.json({sucess:false,msg:"No User Existed with Given User Id and Role combination. Please Provide Valid Details"})
             }
             else{
                 useremail=user.email;
@@ -376,7 +375,7 @@ router.post('/send_user_req', (req, res) => {
     }
     else if(userrole=='tpo')
     {
-        TPO.find({ $or: [ { email: useremailoruid }, {userid:useremailoruid } ] },function(err,user){
+        TPO.findOne({ $or: [ { email: useremailoruid }, {userid:useremailoruid } ] },function(err,user){
             if(err)
             {
                 throw err;
@@ -384,7 +383,7 @@ router.post('/send_user_req', (req, res) => {
             }
             else if(!user)
             {
-                res.json({sucess:false,msg:"Please Provide Valid Email Id and Role"})
+                res.json({sucess:false,msg:"No User Existed with Given User Id and Role combination. Please Provide Valid Details"})
             }
             else{
                 useremail=user.email;

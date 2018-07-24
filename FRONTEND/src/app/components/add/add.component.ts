@@ -106,7 +106,7 @@ export class AddComponent implements OnInit,OnDestroy {
         console.log(data);
         if(data.success){
           this.flashmessage.show(data.msg,{cssClass:'alert-success text-center',timeOut:2000});
-          setTimeout((router: Router) => { //Delays Execution for 5 Seconds
+          setTimeout((router: Router) => { //Delays Execution for 1 Seconds
               this.router.navigate(['/home']);
               this.authService.toggleForm=!this.authService.toggleForm;
               form.reset();
