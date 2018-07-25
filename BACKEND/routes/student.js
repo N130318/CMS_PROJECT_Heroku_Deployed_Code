@@ -66,13 +66,13 @@ router.get('/tposearch',function(req,res,next){
     var years=JSON.parse(req.query.years);
     var minaggrigt=JSON.parse(req.query.minaggrigt);
     if(depts.length!=0&&years.length!=0)
-      quary={dept:{$in:depts},year:{$in:years},aggregate:{$gte:minaggrigt}}
+      quary={dept:{$in:depts},year:{$in:years},aggregate:{$gte:minaggrigt},plcmntinterst:"yes"}
     else if(depts.length==0)
-      quary={year:{$in:years},aggregate:{$gte:minaggrigt}}
+      quary={year:{$in:years},aggregate:{$gte:minaggrigt},plcmntinterst:"yes"}
     else if(years.length==0)
-      quary={dept:{$in:depts},aggregate:{$gte:minaggrigt}}
+      quary={dept:{$in:depts},aggregate:{$gte:minaggrigt},plcmntinterst:"yes"}
     else if(minaggrigt==0||minaggrigt==undefined||minaggrigt=="")
-      quary={dept:{$in:depts},year:{$in:years}}
+      quary={dept:{$in:depts},year:{$in:years},plcmntinterst:"yes"}
     else
       return res.json([]);
     Student.find(quary,function(err,result){

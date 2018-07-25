@@ -561,11 +561,14 @@ router.put('/updateuser/:'+qs.unescape('userid'),multer({dest:"./public/uploads/
                 email:req.body.email,
                 aggregate:req.body.aggregate,
                 address:req.body.address,
-                year:req.body.year
+                year:req.body.year,
+                pic:req.body.pic,
+                plcmntinterst:req.body.plcmntinterst
               };
               if(req.body.pic=="true"){
                 delete stu['pic'];
                 stu=Object.assign(stu,{image:req.file.filename});
+                console.log("newstu"+stu);
               }else{
                 delete stu['pic'];
               }
@@ -596,7 +599,9 @@ router.put('/updateuser/:'+qs.unescape('userid'),multer({dest:"./public/uploads/
                       email:req.body.email,
                       aggregate:req.body.aggregate,
                       address:req.body.address,
-                      year:req.body.year
+                      year:req.body.year,
+                      pic:req.body.pic,
+                      plcmntinterst:req.body.plcmntinterst
                     };
                     if(req.body.pic=="true"){
                       delete stu['pic'];
@@ -641,6 +646,7 @@ router.put('/updateuser/:'+qs.unescape('userid'),multer({dest:"./public/uploads/
                 qualification:req.body.qualification,
                 phone:req.body.phone, 
                 email:req.body.email,
+                pic:req.body.pic,
                 address:req.body.address
               };
               if(req.body.pic=="true"){
@@ -670,6 +676,7 @@ router.put('/updateuser/:'+qs.unescape('userid'),multer({dest:"./public/uploads/
                       qualification:req.body.qualification,
                       phone:req.body.phone, 
                       email:req.body.email,
+                      pic:req.body.pic,
                       address:req.body.address
                     };
                     if(req.body.pic=="true"){
@@ -711,6 +718,7 @@ router.put('/updateuser/:'+qs.unescape('userid'),multer({dest:"./public/uploads/
                 qualification:req.body.qualification,
                 phone:req.body.phone, 
                 email:req.body.email,
+                pic:req.body.pic,
                 address:req.body.address
               }
               if(req.body.pic=="true"){
@@ -742,6 +750,7 @@ router.put('/updateuser/:'+qs.unescape('userid'),multer({dest:"./public/uploads/
                         qualification:req.body.qualification,
                         phone:req.body.phone, 
                         email:req.body.email,
+                        pic:req.body.pic,
                         address:req.body.address
                       }
                       if(req.body.pic=="true"){

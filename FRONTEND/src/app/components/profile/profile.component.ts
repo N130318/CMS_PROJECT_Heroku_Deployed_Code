@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
   role:String;
   profile:any;
   image:any;
+  plcmntinterst:String;
   call:Boolean;
   files:any;
   selected:Boolean;
@@ -53,6 +54,7 @@ export class ProfileComponent implements OnInit {
     this.year=data.year;
     this.qualification=data.qualification;
     this.image=data.image;
+    this.plcmntinterst=data.plcmntinterst;
   }
 
   selectFile($event) {
@@ -74,6 +76,7 @@ export class ProfileComponent implements OnInit {
         this.profile.append("year",this.year);
         this.profile.append("dept",this.dept);
         this.profile.append("role",this.role);
+        this.profile.append("plcmntinterst",this.plcmntinterst);
         this.profile.append('pic',this.selected);
         var studnt_profile={
           name:this.name,
@@ -82,7 +85,8 @@ export class ProfileComponent implements OnInit {
           phone:this.phone,
           aggregate:this.aggregate,
           address:this.address,
-          year:this.year
+          year:this.year,
+          plcmntinterst:this.plcmntinterst
         };
         this.validateoutput=this.validate.studentProfilevalidation(studnt_profile);
         // email:this.email,

@@ -63,9 +63,9 @@ export class ValidateService {
   }
 
   studentProfilevalidation(student){
-    if(student.name==undefined||student.dob==undefined||student.year==undefined||student.aggregate==undefined||student.email==undefined||student.phone==undefined||student.address==undefined)
+    if(student.name==undefined||student.dob==undefined||student.year==undefined||student.aggregate==undefined||student.email==undefined||student.phone==undefined||student.address==undefined||student.plcmntinterst==undefined)
      return false;
-    else if(student.name==""||student.dob==""||student.year==""||student.aggregate==""||student.email==""||student.phone==""||student.address=="")
+    else if(student.name==""||student.dob==""||student.year==""||student.aggregate==""||student.email==""||student.phone==""||student.address==""||student.plcmntinterst=="")
       return false;
     else if((student.email==""||student.email==undefined)||!this.validateEmail(student.email)){
         return false;

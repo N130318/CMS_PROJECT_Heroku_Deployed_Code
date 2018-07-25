@@ -102,7 +102,7 @@
 <!--profile Form-->
 
 <div *ngIf="!authService.isProfileFilled() || checkProfileUpdateCall()">
-<form class="example-form" (submit)="onProfileSubmit()">
+<form class="example-form" (submit)="onProfileSubmit()" ngNativeValidate>
         <div style=" border-style: solid; border-color:transparent; border-radius: 8px;  
         border-width: -5px; margin-top: 9%;background-color:transparent; padding:12px;"class="text-white">
         <h2>Profile : {{this.userid}}</h2>
@@ -126,6 +126,13 @@
         </div>
         <div class="form-group example-full-width" *ngIf="authService.studentLoggedIn()">
             <input placeholder="aggregate" type="number" name="aggregate" [(ngModel)]="aggregate" class="form-control"  required >
+        </div>
+        <div class="form-group example-full-width" *ngIf="authService.studentLoggedIn()">
+            <div class="form-control">
+                <label>Interested in Placements...?</label>
+                <input type="radio" value="yes" name="plcmntinterst" [(ngModel)]="plcmntinterst" title="By clicking this, it is a confirmation your detaills will be accessible to TPO for Plaements" required="required"> Yes 
+                <input type="radio" value="no" name="plcmntinterst" [(ngModel)]="plcmntinterst"title="By clicking this it is a confirmation your detaills will not be accessible to TPO for Plaements"> No
+             </div>
         </div>
         <div class="form-group" *ngIf="authService.studentLoggedIn()">
             <select placeholder="Year" class="example-full-width form-control" name="year" [(ngModel)]="year" required>

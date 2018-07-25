@@ -40,6 +40,9 @@ var StudentSchema = mongoose.Schema({
   image:{
     type:String,
     default:'abc'
+  },
+  plcmntinterst:{
+    type:String
   }
 });
 
