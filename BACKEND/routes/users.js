@@ -1,3 +1,9 @@
+/* Available APIS in this file 
+   Login
+   Adduser
+   Profile Send
+
+*/
 var express = require('express');
 var router = express.Router();
 var mergejson = require('merge-json');

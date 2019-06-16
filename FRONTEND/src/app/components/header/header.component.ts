@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   pselect:String;
 
   constructor(
-    private authService:AuthService,
+    public authService:AuthService,
     private router:Router,
     private flashmessage:FlashMessagesService
   ) { }

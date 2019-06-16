@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
   selected:Boolean;
 
   constructor(
-    private authService:AuthService,
+    public authService:AuthService,
     private flashmessage:FlashMessagesService,
     private router:Router,
     private validate:ValidateService,

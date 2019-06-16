@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit {
   tpoResult:any[];
   tpotable:Boolean=false;
 
-  constructor(private authService:AuthService,
+  constructor(public authService:AuthService,
   private flashmessage:FlashMessagesService,
   private searchService:SearchService,
   private router:Router

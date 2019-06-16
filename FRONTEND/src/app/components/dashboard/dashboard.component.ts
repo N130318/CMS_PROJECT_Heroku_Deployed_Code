@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   pselect:String;
   constructor(
     private postService:PostService,
-    private authService:AuthService,
+    public authService:AuthService,
     private flashmessage:FlashMessagesService,
     private router:Router
   ) {

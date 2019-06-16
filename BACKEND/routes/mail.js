@@ -50,23 +50,23 @@ router.post('/feedback_send', (req, res) => {
     //         })
     //     }
     // });
-    let  transporter = nodemailer.createTransport({
+    let transporter = nodemailer.createTransport({
         host:"smtp.gmail.com",
-        service: "Gmail",
+        service: "gmail",
         secure: false,
         port: 465,
         auth: {
             type:"OAuth2",
             user: "cms.feedback9144@gmail.com", // Your gmail address.
             clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-            clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-            refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+            clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
+            refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
         },
         tls:
         {
             rejectUnauthorized:false
         }
-      });
+    });
   
     // setup email data with unicode symbols
     let mailOptions = {
@@ -122,23 +122,23 @@ router.post('/send_user_req', (req, res) => {
             <p>${req.body.message}</p>
             `;
             
-            let  transporter = nodemailer.createTransport({
+            let transporter = nodemailer.createTransport({
                 host:"smtp.gmail.com",
-                service: "Gmail",
+                service: "gmail",
                 secure: false,
                 port: 465,
                 auth: {
                     type:"OAuth2",
                     user: "cms.feedback9144@gmail.com", // Your gmail address.
                     clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                    refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+                    clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
+                    refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
                 },
                 tls:
                 {
                     rejectUnauthorized:false
                 }
-              });
+            });
         
             // setup email data with unicode symbols
             let mailOptions = {
@@ -187,17 +187,17 @@ router.post('/send_user_req', (req, res) => {
             <p>If not did this please write a request at <a href="https://cryptic-temple-72625.herokuapp.com/#/contactadmin"> contact-admin </a></p>
             `;
             
-            let  transporter1 = nodemailer.createTransport({
+            let transporter1 = nodemailer.createTransport({
                 host:"smtp.gmail.com",
-                service: "Gmail",
+                service: "gmail",
                 secure: false,
                 port: 465,
                 auth: {
                     type:"OAuth2",
                     user: "cms.feedback9144@gmail.com", // Your gmail address.
                     clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                    refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+                    clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
+                    refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
                 },
                 tls:
                 {
@@ -262,17 +262,17 @@ router.post('/send_user_req', (req, res) => {
             <p>${req.body.message}</p>
             `;
             
-            let  transporter = nodemailer.createTransport({
+            let transporter = nodemailer.createTransport({
                 host:"smtp.gmail.com",
-                service: "Gmail",
+                service: "gmail",
                 secure: false,
                 port: 465,
                 auth: {
                     type:"OAuth2",
                     user: "cms.feedback9144@gmail.com", // Your gmail address.
                     clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                    refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+                    clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
+                    refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
                 },
                 tls:
                 {
@@ -325,23 +325,23 @@ router.post('/send_user_req', (req, res) => {
             <p>If not did this please write a request at <a href="https://cryptic-temple-72625.herokuapp.com/#/contactadmin"> contact-admin </a></p>
             `;
             
-            let  transporter1 = nodemailer.createTransport({
+            let transporter1 = nodemailer.createTransport({
                 host:"smtp.gmail.com",
-                service: "Gmail",
+                service: "gmail",
                 secure: false,
                 port: 465,
                 auth: {
                     type:"OAuth2",
                     user: "cms.feedback9144@gmail.com", // Your gmail address.
                     clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                    refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+                    clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
+                    refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
                 },
                 tls:
                 {
                     rejectUnauthorized:false
                 }
-              });
+            });
         
             // setup email data with unicode symbols
             let mailOptions1 = {
@@ -400,17 +400,17 @@ router.post('/send_user_req', (req, res) => {
             <p>${req.body.message}</p>
             `;
             
-            let  transporter = nodemailer.createTransport({
+            let transporter = nodemailer.createTransport({
                 host:"smtp.gmail.com",
-                service: "Gmail",
+                service: "gmail",
                 secure: false,
                 port: 465,
                 auth: {
                     type:"OAuth2",
                     user: "cms.feedback9144@gmail.com", // Your gmail address.
                     clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                    refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+                    clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
+                    refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
                 },
                 tls:
                 {
@@ -463,17 +463,17 @@ router.post('/send_user_req', (req, res) => {
             <p>If not did this please write a request at <a href="https://cryptic-temple-72625.herokuapp.com/#/contactadmin"> contact-admin </a></p>
             `;
             
-            let  transporter1 = nodemailer.createTransport({
+            let transporter1 = nodemailer.createTransport({
                 host:"smtp.gmail.com",
-                service: "Gmail",
+                service: "gmail",
                 secure: false,
                 port: 465,
                 auth: {
                     type:"OAuth2",
                     user: "cms.feedback9144@gmail.com", // Your gmail address.
                     clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                    refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+                    clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
+                    refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
                 },
                 tls:
                 {
@@ -572,23 +572,23 @@ router.post('/forgot', function(req, res, next) {
         });
         },
         function(token, user, done) {
-            var smtpTransport = nodemailer.createTransport({
+            let smtpTransport = nodemailer.createTransport({
                 host:"smtp.gmail.com",
-                service: "Gmail",
+                service: "gmail",
                 secure: false,
                 port: 465,
                 auth: {
                     type:"OAuth2",
                     user: "cms.feedback9144@gmail.com", // Your gmail address.
                     clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                    refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+                    clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
+                    refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
                 },
                 tls:
                 {
                     rejectUnauthorized:false
                 }
-              });
+            });
             const output_text = `
               <p>Dear ${upperCase(usrrole)},</p>
               <p>You are receiving this e-mail because you (or someone else) have requested to </p>
@@ -672,23 +672,23 @@ router.post('/reset/:token', function(req, res) {
         },
         function(user, done) {
         //console.log(user);
-        var smtpTransport = nodemailer.createTransport({
+        let smtpTransport = nodemailer.createTransport({
             host:"smtp.gmail.com",
-            service: "Gmail",
+            service: "gmail",
             secure: false,
             port: 465,
             auth: {
                 type:"OAuth2",
                 user: "cms.feedback9144@gmail.com", // Your gmail address.
                 clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
+                clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
+                refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
             },
             tls:
             {
                 rejectUnauthorized:false
             }
-          });
+        });
         var mailOptions = {
             to: usermail,
             from: 'cms.feedback9144@gmail.com',

@@ -18,7 +18,7 @@ export class ManageusersComponent implements OnInit,OnDestroy {
   type:String;
   usertype:String="USERS";
   dispose;
-  constructor(private authService:AuthService,
+  constructor(public authService:AuthService,
     private flashmessage:FlashMessagesService,
     private router:Router) {
      }
