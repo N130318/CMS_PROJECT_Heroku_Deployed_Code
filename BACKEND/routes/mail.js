@@ -50,20 +50,30 @@ router.post('/feedback_send', (req, res) => {
     //         })
     //     }
     // });
+    // let transporter = nodemailer.createTransport({
+    //     host:"smtp.gmail.com",
+    //     service: "gmail",
+    //     secure: true,
+    //     port: 465,
+    //     auth: {
+    //         type:"OAuth2",
+    //         user: "cms.feedback9144@gmail.com", // Your gmail address.
+    //         clientId: "1081972092385-qduabb5miam91ps1cqhfcqbigcujlstk.apps.googleusercontent.com",
+    //         clientSecret: "-CvRFs4sBiazvyljL64kDuFk",
+    //         refreshToken: "1/E8EVEFRxYZ1DyeDee6WsK8CWN71GCowdGbim2y6ckh8",
+    //         accessToken: "ya29.GluKB4b_bQS6uHLYWFq_OnIXIWHGsaq-LWWIRpL9pP0Kq2zwCAQi1AsSugvVMS7bF6q24QYZnHvIZ10RhpC6v8_gsdH-jCa1HBozIVq7G8Nkga_jUA1vFRYN1yoA",
+    //         expires: 1484314697598
+    //     }
+    // });
     let transporter = nodemailer.createTransport({
-        host:"smtp.gmail.com",
-        service: "gmail",
+        service: 'gmail',
         secure: false,
-        port: 465,
+        port: 25,
         auth: {
-            type:"OAuth2",
-            user: "cms.feedback9144@gmail.com", // Your gmail address.
-            clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-            clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
-            refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
+          user: 'cms.feedback9144@gmail.com',
+          pass: 'password@9144'
         },
-        tls:
-        {
+        tls:{
             rejectUnauthorized:false
         }
     });
@@ -123,19 +133,14 @@ router.post('/send_user_req', (req, res) => {
             `;
             
             let transporter = nodemailer.createTransport({
-                host:"smtp.gmail.com",
-                service: "gmail",
+                service: 'gmail',
                 secure: false,
-                port: 465,
+                port: 25,
                 auth: {
-                    type:"OAuth2",
-                    user: "cms.feedback9144@gmail.com", // Your gmail address.
-                    clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
-                    refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
+                  user: 'cms.feedback9144@gmail.com',
+                  pass: 'password@9144'
                 },
-                tls:
-                {
+                tls:{
                     rejectUnauthorized:false
                 }
             });
@@ -188,22 +193,17 @@ router.post('/send_user_req', (req, res) => {
             `;
             
             let transporter1 = nodemailer.createTransport({
-                host:"smtp.gmail.com",
-                service: "gmail",
+                service: 'gmail',
                 secure: false,
-                port: 465,
+                port: 25,
                 auth: {
-                    type:"OAuth2",
-                    user: "cms.feedback9144@gmail.com", // Your gmail address.
-                    clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
-                    refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
+                  user: 'cms.feedback9144@gmail.com',
+                  pass: 'password@9144'
                 },
-                tls:
-                {
+                tls:{
                     rejectUnauthorized:false
                 }
-              });
+            });
         
             // setup email data with unicode symbols
             let mailOptions1 = {
@@ -263,22 +263,17 @@ router.post('/send_user_req', (req, res) => {
             `;
             
             let transporter = nodemailer.createTransport({
-                host:"smtp.gmail.com",
-                service: "gmail",
+                service: 'gmail',
                 secure: false,
-                port: 465,
+                port: 25,
                 auth: {
-                    type:"OAuth2",
-                    user: "cms.feedback9144@gmail.com", // Your gmail address.
-                    clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
-                    refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
+                  user: 'cms.feedback9144@gmail.com',
+                  pass: 'password@9144'
                 },
-                tls:
-                {
+                tls:{
                     rejectUnauthorized:false
                 }
-              });
+            });
         
             // setup email data with unicode symbols
             let mailOptions = {
@@ -326,19 +321,14 @@ router.post('/send_user_req', (req, res) => {
             `;
             
             let transporter1 = nodemailer.createTransport({
-                host:"smtp.gmail.com",
-                service: "gmail",
+                service: 'gmail',
                 secure: false,
-                port: 465,
+                port: 25,
                 auth: {
-                    type:"OAuth2",
-                    user: "cms.feedback9144@gmail.com", // Your gmail address.
-                    clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
-                    refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
+                  user: 'cms.feedback9144@gmail.com',
+                  pass: 'password@9144'
                 },
-                tls:
-                {
+                tls:{
                     rejectUnauthorized:false
                 }
             });
@@ -401,22 +391,17 @@ router.post('/send_user_req', (req, res) => {
             `;
             
             let transporter = nodemailer.createTransport({
-                host:"smtp.gmail.com",
-                service: "gmail",
+                service: 'gmail',
                 secure: false,
-                port: 465,
+                port: 25,
                 auth: {
-                    type:"OAuth2",
-                    user: "cms.feedback9144@gmail.com", // Your gmail address.
-                    clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
-                    refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
+                  user: 'cms.feedback9144@gmail.com',
+                  pass: 'password@9144'
                 },
-                tls:
-                {
+                tls:{
                     rejectUnauthorized:false
                 }
-              });
+            });
         
             // setup email data with unicode symbols
             let mailOptions = {
@@ -464,22 +449,17 @@ router.post('/send_user_req', (req, res) => {
             `;
             
             let transporter1 = nodemailer.createTransport({
-                host:"smtp.gmail.com",
-                service: "gmail",
+                service: 'gmail',
                 secure: false,
-                port: 465,
+                port: 25,
                 auth: {
-                    type:"OAuth2",
-                    user: "cms.feedback9144@gmail.com", // Your gmail address.
-                    clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
-                    refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
+                  user: 'cms.feedback9144@gmail.com',
+                  pass: 'password@9144'
                 },
-                tls:
-                {
+                tls:{
                     rejectUnauthorized:false
                 }
-              });
+            });
         
             // setup email data with unicode symbols
             let mailOptions1 = {
@@ -573,19 +553,14 @@ router.post('/forgot', function(req, res, next) {
         },
         function(token, user, done) {
             let smtpTransport = nodemailer.createTransport({
-                host:"smtp.gmail.com",
-                service: "gmail",
+                service: 'gmail',
                 secure: false,
-                port: 465,
+                port: 25,
                 auth: {
-                    type:"OAuth2",
-                    user: "cms.feedback9144@gmail.com", // Your gmail address.
-                    clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
-                    refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
+                  user: 'cms.feedback9144@gmail.com',
+                  pass: 'password@9144'
                 },
-                tls:
-                {
+                tls:{
                     rejectUnauthorized:false
                 }
             });
@@ -673,19 +648,14 @@ router.post('/reset/:token', function(req, res) {
         function(user, done) {
         //console.log(user);
         let smtpTransport = nodemailer.createTransport({
-            host:"smtp.gmail.com",
-            service: "gmail",
+            service: 'gmail',
             secure: false,
-            port: 465,
+            port: 25,
             auth: {
-                type:"OAuth2",
-                user: "cms.feedback9144@gmail.com", // Your gmail address.
-                clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                clientSecret: "uY2L8p3gWCWIAcDwE6LtcbSM",
-                refreshToken: "1/SEYU8P-TWAdXIjXiPv_73Ihi6HZlW5swXdWyYpqBl5Y",
+              user: 'cms.feedback9144@gmail.com',
+              pass: 'password@9144'
             },
-            tls:
-            {
+            tls:{
                 rejectUnauthorized:false
             }
         });

@@ -183,22 +183,17 @@ router.post('/adduser',function(req,res,next){
                             <p>Please Don't Share these credentials with anyone</p>
                             <p>Please Use Google Chrome For better Experience`;
             let transporter = nodemailer.createTransport({
-              host:"smtp.gmail.com",
-              service: "Gmail",
+              service: 'gmail',
               secure: false,
-              port: 465,
+              port: 25,
               auth: {
-                type:"OAuth2",
-                user: "cms.feedback9144@gmail.com", // Your gmail address.
-                clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
-                },
-              tls:
-              {
-                    rejectUnauthorized:false
-                }
-              });
+                user: 'cms.feedback9144@gmail.com',
+                pass: 'password@9144'
+              },
+              tls:{
+                  rejectUnauthorized:false
+              }
+            });
           
             // setup email data with unicode symbols
             let mailOptions = {
@@ -262,22 +257,17 @@ router.post('/adduser',function(req,res,next){
                             <p>Please Don't Share these credentials with anyone</p>
                             <p>Please Use Google Chrome For better Experience`;
             let transporter = nodemailer.createTransport({
-              host:"smtp.gmail.com",
-              service: "Gmail",
+              service: 'gmail',
               secure: false,
-              port: 465,
+              port: 25,
               auth: {
-                type:"OAuth2",
-                user: "cms.feedback9144@gmail.com", // Your gmail address.
-                clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
-                },
-              tls:
-              {
-                    rejectUnauthorized:false
-                }
-              });
+                user: 'cms.feedback9144@gmail.com',
+                pass: 'password@9144'
+              },
+              tls:{
+                  rejectUnauthorized:false
+              }
+            });
           
             // setup email data with unicode symbols
             let mailOptions = {
@@ -329,22 +319,17 @@ router.post('/adduser',function(req,res,next){
                             <p>Please Don't Share these credentials with anyone</p>
                             <p>Please Use Google Chrome For better Experience`;
             let transporter = nodemailer.createTransport({
-              host:"smtp.gmail.com",
-              service: "Gmail",
+              service: 'gmail',
               secure: false,
-              port: 465,
+              port: 25,
               auth: {
-                type:"OAuth2",
-                user: "cms.feedback9144@gmail.com", // Your gmail address.
-                clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
-                },
-              tls:
-              {
-                    rejectUnauthorized:false
-                }
-              });
+                user: 'cms.feedback9144@gmail.com',
+                pass: 'password@9144'
+              },
+              tls:{
+                  rejectUnauthorized:false
+              }
+            });
           
             // setup email data with unicode symbols
             let mailOptions = {
@@ -385,22 +370,17 @@ router.post('/adduser',function(req,res,next){
                         <p>You can Manage(Update/Delete) Admins Only through <a href="https://mlab.com">https://mlab.com</a></p>
                         <p>You can use <a href="https://bcrypt-generator.com/">https://bcrypt-generator.com/</a>to Uodate Admin Password</p>`;
             let transporter = nodemailer.createTransport({
-              host:"smtp.gmail.com",
-              service: "Gmail",
+              service: 'gmail',
               secure: false,
-              port: 465,
+              port: 25,
               auth: {
-                type:"OAuth2",
-                user: "cms.feedback9144@gmail.com", // Your gmail address.
-                clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
-                },
-              tls:
-              {
-                    rejectUnauthorized:false
-                }
-              });
+                user: 'cms.feedback9144@gmail.com',
+                pass: 'password@9144'
+              },
+              tls:{
+                  rejectUnauthorized:false
+              }
+            });
           
             // setup email data with unicode symbols
             let mailOptions = {
@@ -843,23 +823,18 @@ router.post('/changepassword', function(req, res, next) {
                         <p>If you Not did this please click on <a href="https://cryptic-temple-72625.herokuapp.com/#/forgot">forgot password</a> to change your Password Immidiately,Kindly Cooperate with us.</p>
                         `;
                     
-                        let  transporter = nodemailer.createTransport({
-                          host:"smtp.gmail.com",
-                          service: "Gmail",
+                        let transporter = nodemailer.createTransport({
+                          service: 'gmail',
                           secure: false,
-                          port: 465,
+                          port: 25,
                           auth: {
-                            type:"OAuth2",
-                            user: "cms.feedback9144@gmail.com", // Your gmail address.
-                            clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                            clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                            refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
-                            },
-                          tls:
-                          {
-                                rejectUnauthorized:false
-                            }
-                          });
+                            user: 'cms.feedback9144@gmail.com',
+                            pass: 'password@9144'
+                          },
+                          tls:{
+                              rejectUnauthorized:false
+                          }
+                        });
                     
                         // setup email data with unicode symbols
                         let mailOptions = {
@@ -899,23 +874,18 @@ router.post('/changepassword', function(req, res, next) {
                     <p>If you Not did this please click on <a href="https://cryptic-temple-72625.herokuapp.com/#/forgot">forgot password</a> to change your Password Immidiately,Kindly Cooperate with us.</p>
                     `;
                 
-                let  transporter = nodemailer.createTransport({
-                  host:"smtp.gmail.com",
-                  service: "Gmail",
+                let transporter = nodemailer.createTransport({
+                  service: 'gmail',
                   secure: false,
-                  port: 465,
+                  port: 25,
                   auth: {
-                    type:"OAuth2",
-                    user: "cms.feedback9144@gmail.com", // Your gmail address.
-                    clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                    refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
-                    },
-                  tls:
-                  {
-                        rejectUnauthorized:false
-                    }
-                  });
+                    user: 'cms.feedback9144@gmail.com',
+                    pass: 'password@9144'
+                  },
+                  tls:{
+                      rejectUnauthorized:false
+                  }
+                });
             
                 // setup email data with unicode symbols
                 let mailOptions = {
@@ -954,23 +924,18 @@ router.post('/changepassword', function(req, res, next) {
                     <p>If you Not did this please click on <a href="https://cryptic-temple-72625.herokuapp.com/#/forgot">forgot password</a> to change your Password Immidiately,Kindly Cooperate with us.</p>
                     `;
                 
-                let  transporter = nodemailer.createTransport({
-                  host:"smtp.gmail.com",
-                  service: "Gmail",
+                let transporter = nodemailer.createTransport({
+                  service: 'gmail',
                   secure: false,
-                  port: 465,
+                  port: 25,
                   auth: {
-                    type:"OAuth2",
-                    user: "cms.feedback9144@gmail.com", // Your gmail address.
-                    clientId: "308394806162-05urrln2cdalmn3ulnfoh0timj0uf51q.apps.googleusercontent.com",
-                    clientSecret: "MaP1MuS2exIikaIyIuDk9uWq",
-                    refreshToken: "1/WStdUMULUA5lEXrEUKtbxEYVHNiXATvjetJuu4MaFZs"
-                    },
-                  tls:
-                  {
-                        rejectUnauthorized:false
-                    }
-                  });
+                    user: 'cms.feedback9144@gmail.com',
+                    pass: 'password@9144'
+                  },
+                  tls:{
+                      rejectUnauthorized:false
+                  }
+                });
             
                 // setup email data with unicode symbols
                 let mailOptions = {
